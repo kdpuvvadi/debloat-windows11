@@ -19,3 +19,6 @@ function SetLeftStart {
     }
 }
 
+write-host -nonewline "Set Start Menu to Left?(Y/N)"
+$response = read-host
+if ( $response -match "[Y/y]" ) { SetLeftStart }
