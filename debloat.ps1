@@ -7,7 +7,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Start-Process powershell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
     Exit
 }
-
+Clear-Host
 $explorerPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 
 function SetLeftStart {
@@ -18,7 +18,7 @@ function SetLeftStart {
     }
     $checkStart = Get-ItemProperty -Path $explorerPath -Name TaskbarAl
     if( $checkStart.TaskbarAl -eq 0 ) {
-        Write-Host "Setting Start Menu to Left Completed."
+        Write-Host "Setting Start Menu to Left Completed." -ForegroundColor Green -BackgroundColor white
     }
 
 }
@@ -31,7 +31,7 @@ function RemoveChat {
     }
     $checkChat = Get-ItemProperty -Path $explorerPath -Name TaskbarMn
     if( $checkChat.TaskbarMn -eq 0 ) {
-        Write-Host "Removing chat from Start Menu Completed."
+        Write-Host "Removing chat from Start Menu Completed." -ForegroundColor Green -BackgroundColor white
     }
 
 }
@@ -58,7 +58,7 @@ function RemoveSearchIcon {
     }
     $checkSearch = Get-ItemProperty -Path $SearchKeyPath -Name SearchboxTaskbarMode
     if( $checkSearch.SearchboxTaskbarMode -eq 0 ) {
-        Write-Host "Remove search on Taskbar Completed."
+        Write-Host "Remove search on Taskbar Completed." -ForegroundColor Green -BackgroundColor white
     }
 
 }
