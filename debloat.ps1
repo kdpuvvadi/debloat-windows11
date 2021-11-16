@@ -49,6 +49,19 @@ function RemoveTaskView {
 
 }
 
+function RemoveWidgeticon {
+    Write-Host "Removing Widget Button"
+
+    if(Test-Path $explorerPath) {
+        Set-ItemProperty -Path $explorerPath -Name TaskbarDa -Value 0
+    }
+    $checkChat = Get-ItemProperty -Path $explorerPath -Name TaskbarDa
+    if( $checkChat.TaskbarDa -eq 0 ) {
+        Write-Host "Removing Widget Button Completed." -ForegroundColor Green -BackgroundColor white
+    }
+
+}
+
 function RemoveSearchIcon {
     Write-Host "Removing search on Taskbar"
     $SearchKeyPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Search"
@@ -78,3 +91,7 @@ if ( $response -match "[Y/y]" ) { RemoveSearchIcon }
 write-host -nonewline "Remove Taskview Button from Taskbar?(Y/N)"
 $response = read-host
 if ( $response -match "[Y/y]" ) { RemoveTaskView }
+
+write-host -nonewline "Remove Widget Button from Taskbar?(Y/N)"
+$response = read-host
+if ( $response -match "[Y/y]" ) { RemoveWidgeticon }
