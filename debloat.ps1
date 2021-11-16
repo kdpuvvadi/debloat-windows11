@@ -76,6 +76,22 @@ function RemoveSearchIcon {
 
 }
 
+function DisableVBS {
+    Write-Host "Disabling Virtualization based Security"
+    $VBSPath = "HKLM:SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity"
+
+    if(Test-Path $VBSPath) {
+        Set-ItemProperty -Path $VBSPath -Name Enabled -Value 0
+    }
+    $checkSearch = Get-ItemProperty -Path $VBSPath -Name Enabled
+    if( $checkSearch.Enabled -eq 0 ) {
+        Write-Host "Disabling Virtualization based Security Completed." -ForegroundColor Green -BackgroundColor white
+    }
+
+}
+
+
+
 write-host -nonewline "Set Start Menu to Left?(Y/N)"
 $response = read-host
 if ( $response -match "[Y/y]" ) { SetLeftStart }
@@ -95,3 +111,7 @@ if ( $response -match "[Y/y]" ) { RemoveTaskView }
 write-host -nonewline "Remove Widget Button from Taskbar?(Y/N)"
 $response = read-host
 if ( $response -match "[Y/y]" ) { RemoveWidgeticon }
+
+write-host -nonewline "Disable VBS?(Y/N)"
+$response = read-host
+if ( $response -match "[Y/y]" ) { DisableVBS }
