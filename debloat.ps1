@@ -8,19 +8,16 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Exit
 }
 
+$explorerPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 
 function SetLeftStart {
     Write-Host "Setting Start Menu to Left"
-    $StartKeyPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
-    $StartKey = "TaskbarAl"
-
-    if(Test-Path $StartKeyPath) {
-        Set-ItemProperty -Path $StartKeyPath -Name $StartKey -Value 0
+    
+    if(Test-Path $explorerPath) {
+        Set-ItemProperty -Path $explorerPath -Name TaskbarAl -Value 0
     }
-
-    $checkStart = Get-ItemProperty -Path $StartKeyPath -Name $StartKey
-
-    if( $checkStart.$tartKey -eq 0 ) {
+    $checkStart = Get-ItemProperty -Path $explorerPath -Name TaskbarAl
+    if( $checkStart.TaskbarAl -eq 0 ) {
         Write-Host "Setting Start Menu to Left Completed."
     }
 
@@ -28,16 +25,12 @@ function SetLeftStart {
 
 function RemoveChat {
     Write-Host "Setting Start Menu to Left"
-    $ChatKeyPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
-    $ChatKey = "TaskbarMn"
 
-    if(Test-Path $StartKeyPath) {
-        Set-ItemProperty -Path $ChatKeyPath -Name $ChatKey -Value 0
+    if(Test-Path $explorerPath) {
+        Set-ItemProperty -Path $explorerPath -Name TaskbarMn -Value 0
     }
-
-    $checkChat = Get-ItemProperty -Path $ChatKeyPath -Name $ChatKey
-
-    if( $checkChat.$ChatKey -eq 0 ) {
+    $checkChat = Get-ItemProperty -Path $explorerPath -Name TaskbarMn
+    if( $checkChat.TaskbarMn -eq 0 ) {
         Write-Host "Removing chat from Start Menu Completed."
     }
 
