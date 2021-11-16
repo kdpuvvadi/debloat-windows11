@@ -20,7 +20,7 @@ function SetLeftStart {
 
     $checkStart = Get-ItemProperty -Path $StartKeyPath -Name $StartKey
 
-    if( $checkStart.$($tartKey) -eq 0 ) {
+    if( $checkStart.$tartKey -eq 0 ) {
         Write-Host "Setting Start Menu to Left Completed."
     }
 
@@ -35,9 +35,9 @@ function RemoveChat {
         Set-ItemProperty -Path $ChatKeyPath -Name $ChatKey -Value 0
     }
 
-    $checkStart = Get-ItemProperty -Path $ChatKeyPath -Name $ChatKey
+    $checkChat = Get-ItemProperty -Path $ChatKeyPath -Name $ChatKey
 
-    if( $checkStart.$($ChatKey) -eq 0 ) {
+    if( $checkChat.$ChatKey -eq 0 ) {
         Write-Host "Removing chat from Start Menu Completed."
     }
 
