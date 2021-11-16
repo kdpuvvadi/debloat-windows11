@@ -18,14 +18,36 @@ function SetLeftStart {
         Set-ItemProperty -Path $StartKeyPath -Name $StartKey -Value 0
     }
 
-    $checkStart = Get-ItemProperty -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarAl
+    $checkStart = Get-ItemProperty -Path $StartKeyPath -Name $StartKey
 
-    if( $checkStart.TaskbarAl -eq 0 ) {
+    if( $checkStart.$($tartKey) -eq 0 ) {
         Write-Host "Setting Start Menu to Left Completed."
     }
 
 }
 
+function RemoveChat {
+    Write-Host "Setting Start Menu to Left"
+    $ChatKeyPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+    $ChatKey = "TaskbarMn"
+
+    if(Test-Path $StartKeyPath) {
+        Set-ItemProperty -Path $ChatKeyPath -Name $ChatKey -Value 0
+    }
+
+    $checkStart = Get-ItemProperty -Path $ChatKeyPath -Name $ChatKey
+
+    if( $checkStart.$($ChatKey) -eq 0 ) {
+        Write-Host "Removing chat from Start Menu Completed."
+    }
+
+}
+
+
 write-host -nonewline "Set Start Menu to Left?(Y/N)"
 $response = read-host
 if ( $response -match "[Y/y]" ) { SetLeftStart }
+
+write-host -nonewline "Remove chat from Start?(Y/N)"
+$response = read-host
+if ( $response -match "[Y/y]" ) { RemoveChat }
