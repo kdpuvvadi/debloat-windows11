@@ -20,7 +20,7 @@ function SetLeftStart {
 
     $checkStart = Get-ItemProperty -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarAl
 
-    if( $checkStart.TaskbarAl -eq 1 ) {
+    if( $checkStart.TaskbarAl -eq 0 ) {
         Write-Host "Setting Start Menu to Left Completed."
     }
 
