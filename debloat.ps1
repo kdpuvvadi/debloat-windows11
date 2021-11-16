@@ -17,6 +17,13 @@ function SetLeftStart {
     if(Test-Path $StartKeyPath) {
         Set-ItemProperty -Path $StartKeyPath -Name $StartKey -Value 0
     }
+
+    $checkStart = Get-ItemProperty -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarAl
+
+    if( $checkStart.TaskbarAl -eq 1 ) {
+        Write-Host "Setting Start Menu to Left Completed."
+    }
+
 }
 
 write-host -nonewline "Set Start Menu to Left?(Y/N)"
