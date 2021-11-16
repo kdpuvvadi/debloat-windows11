@@ -36,6 +36,19 @@ function RemoveChat {
 
 }
 
+function RemoveTaskView {
+    Write-Host "Removing Taskview Button"
+
+    if(Test-Path $explorerPath) {
+        Set-ItemProperty -Path $explorerPath -Name ShowTaskViewButton -Value 0
+    }
+    $checkChat = Get-ItemProperty -Path $explorerPath -Name ShowTaskViewButton
+    if( $checkChat.ShowTaskViewButton -eq 0 ) {
+        Write-Host "Removing Taskview Button Completed." -ForegroundColor Green -BackgroundColor white
+    }
+
+}
+
 function RemoveSearchIcon {
     Write-Host "Removing search on Taskbar"
     $SearchKeyPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Search"
@@ -61,3 +74,7 @@ if ( $response -match "[Y/y]" ) { RemoveChat }
 write-host -nonewline "Remove Search from Taskbar?(Y/N)"
 $response = read-host
 if ( $response -match "[Y/y]" ) { RemoveSearchIcon }
+
+write-host -nonewline "Remove Taskview Button from Taskbar?(Y/N)"
+$response = read-host
+if ( $response -match "[Y/y]" ) { RemoveTaskView }
