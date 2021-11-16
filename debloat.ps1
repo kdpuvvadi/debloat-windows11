@@ -36,6 +36,18 @@ function RemoveChat {
 
 }
 
+function RemoveSearchIcon {
+    Write-Host "Removing search on Taskbar"
+
+    if(Test-Path $explorerPath) {
+        Set-ItemProperty -Path $explorerPath -Name SearchboxTaskbarMode -Value 0
+    }
+    $checkSearch = Get-ItemProperty -Path $explorerPath -Name SearchboxTaskbarMode
+    if( $checkSearch.SearchboxTaskbarMode -eq 0 ) {
+        Write-Host "Remove search on Taskbar Completed."
+    }
+
+}
 
 write-host -nonewline "Set Start Menu to Left?(Y/N)"
 $response = read-host
@@ -44,3 +56,7 @@ if ( $response -match "[Y/y]" ) { SetLeftStart }
 write-host -nonewline "Remove chat from Start?(Y/N)"
 $response = read-host
 if ( $response -match "[Y/y]" ) { RemoveChat }
+
+write-host -nonewline "Remove Search from Taskbar?(Y/N)"
+$response = read-host
+if ( $response -match "[Y/y]" ) { RemoveSearchIcon }
