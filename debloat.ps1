@@ -38,11 +38,12 @@ function RemoveChat {
 
 function RemoveSearchIcon {
     Write-Host "Removing search on Taskbar"
+    $SearchKeyPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Search"
 
     if(Test-Path $explorerPath) {
-        Set-ItemProperty -Path $explorerPath -Name SearchboxTaskbarMode -Value 0
+        Set-ItemProperty -Path $SearchKeyPath -Name SearchboxTaskbarMode -Value 0
     }
-    $checkSearch = Get-ItemProperty -Path $explorerPath -Name SearchboxTaskbarMode
+    $checkSearch = Get-ItemProperty -Path $SearchKeyPath -Name SearchboxTaskbarMode
     if( $checkSearch.SearchboxTaskbarMode -eq 0 ) {
         Write-Host "Remove search on Taskbar Completed."
     }
