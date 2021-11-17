@@ -7,6 +7,14 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Start-Process powershell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
     Exit
 }
+
+$GetOSVersion = [environment]::OSVersion.Version.Major
+
+if ($GetOSVersion -ne 11) {
+    throw "debloat-windows11 only works on Windows 11"
+}
+
+
 Clear-Host
 $explorerPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 
