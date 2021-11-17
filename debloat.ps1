@@ -8,9 +8,9 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Exit
 }
 
-$GetOSVersion = [environment]::OSVersion.Version.Major
+$GetOSVersion = (Get-ItemProperty  -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion").DisplayVersion
 
-if ($GetOSVersion -ne 11) {
+if ($GetOSVersion -ne '21H1') {
     throw "debloat-windows11 only works on Windows 11"
 }
 
