@@ -26,7 +26,7 @@ function SetLeftStart {
     }
     $checkStart = Get-ItemProperty -Path $explorerPath -Name TaskbarAl
     if( $checkStart.TaskbarAl -eq 0 ) {
-        Write-Host "Done" -ForegroundColor Green -BackgroundColor white
+        Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
 }
@@ -39,7 +39,7 @@ function RemoveChat {
     }
     $checkChat = Get-ItemProperty -Path $explorerPath -Name TaskbarMn
     if( $checkChat.TaskbarMn -eq 0 ) {
-        Write-Host "Done" -ForegroundColor Green -BackgroundColor white
+        Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
 }
@@ -52,7 +52,7 @@ function RemoveTaskView {
     }
     $checkChat = Get-ItemProperty -Path $explorerPath -Name ShowTaskViewButton
     if( $checkChat.ShowTaskViewButton -eq 0 ) {
-        Write-Host "Done" -ForegroundColor Green -BackgroundColor white
+        Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
 }
@@ -65,7 +65,7 @@ function RemoveWidgeticon {
     }
     $checkChat = Get-ItemProperty -Path $explorerPath -Name TaskbarDa
     if( $checkChat.TaskbarDa -eq 0 ) {
-        Write-Host "Done" -ForegroundColor Green -BackgroundColor white
+        Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
 }
@@ -79,7 +79,7 @@ function RemoveSearchIcon {
     }
     $checkSearch = Get-ItemProperty -Path $SearchKeyPath -Name SearchboxTaskbarMode
     if( $checkSearch.SearchboxTaskbarMode -eq 0 ) {
-        Write-Host "Done" -ForegroundColor Green -BackgroundColor white
+        Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
 }
@@ -93,7 +93,7 @@ function DisableVBS {
     }
     $checkSearch = Get-ItemProperty -Path $VBSPath -Name Enabled
     if( $checkSearch.Enabled -eq 0 ) {
-        Write-Host "Done" -ForegroundColor Green -BackgroundColor white
+        Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
 }
