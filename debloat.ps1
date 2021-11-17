@@ -18,6 +18,19 @@ if ($GetOSVersion -ne '21H2') {
 Clear-Host
 $explorerPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 
+$logsFolder = "$PWD\logs\"
+If (Test-Path $logsFolder) {
+    Write-Output "$logsFolder exists. Skipping."
+}
+Else {
+    Write-Output "The folder '$logsFolder' doesn't exist. This folder will be used for storing logs created after the script runs. Creating now."
+    Start-Sleep 1
+    New-Item -Path "$logsFolder" -ItemType Directory
+    Write-Output "The folder $logsFolder was successfully created."
+}
+
+
+
 function SetLeftStart {
     Write-Host "Setting Start Menu to Left" -ForegroundColor Red
     
