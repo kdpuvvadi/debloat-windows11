@@ -16,7 +16,7 @@ if ($GetOSVersion -ne '21H2') {
 
 
 Clear-Host
-$explorerPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+
 
 $logsFolder = "$PWD\logs\"
 If (Test-Path $logsFolder) {
@@ -31,10 +31,49 @@ Else {
 }
 
 
+# GUI Start Here
 
-function SetLeftStart {
+<# This form was created using POSHGUI.com  a free online gui designer for PowerShell
+.NAME
+    debloat
+#>
+
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.Application]::EnableVisualStyles()
+
+$DebloatWindows11               = New-Object system.Windows.Forms.Form
+$DebloatWindows11.ClientSize    = New-Object System.Drawing.Point(600,500)
+$DebloatWindows11.text          = "Debloat Windows 11"
+$DebloatWindows11.TopMost       = $false
+$DebloatWindows11.BackColor     = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+
+$TaskbarLable                    = New-Object system.Windows.Forms.Label
+$TaskbarLable.text               = "Taskbar"
+$TaskbarLable.AutoSize           = $true
+$TaskbarLable.width              = 25
+$TaskbarLable.height             = 39
+$TaskbarLable.location           = New-Object System.Drawing.Point(22,21)
+$TaskbarLable.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',15,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
+$TaskbarLable.ForeColor          = [System.Drawing.ColorTranslator]::FromHtml("#857bfc")
+
+$unpin                           = New-Object system.Windows.Forms.Button
+$unpin.text                      = "unpin Taskbar icons"
+$unpin.width                     = 161
+$unpin.height                    = 39
+$unpin.location                  = New-Object System.Drawing.Point(19,51)
+$unpin.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$DebloatWindows11.controls.AddRange(@($TaskbarLable,$unpin))
+
+$unpin.Add_Click({ removeTaskIcon })
+
+#Write your logic code here
+
+
+function removeTaskIcon {
+    $explorerPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+
     Write-Host "Setting Start Menu to Left" -ForegroundColor Red
-    
     if(Test-Path $explorerPath) {
         Set-ItemProperty -Path $explorerPath -Name TaskbarAl -Value 0
     }
@@ -43,11 +82,7 @@ function SetLeftStart {
         Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
-}
-
-function RemoveChat {
     Write-Host "Setting Start Menu to Left" -ForegroundColor Red
-
     if(Test-Path $explorerPath) {
         Set-ItemProperty -Path $explorerPath -Name TaskbarMn -Value 0
     }
@@ -56,11 +91,7 @@ function RemoveChat {
         Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
-}
-
-function RemoveTaskView {
     Write-Host "Removing Taskview Button" -ForegroundColor Red
-
     if(Test-Path $explorerPath) {
         Set-ItemProperty -Path $explorerPath -Name ShowTaskViewButton -Value 0
     }
@@ -69,11 +100,7 @@ function RemoveTaskView {
         Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
-}
-
-function RemoveWidgeticon {
     Write-Host "Removing Widget Button" -ForegroundColor Red
-
     if(Test-Path $explorerPath) {
         Set-ItemProperty -Path $explorerPath -Name TaskbarDa -Value 0
     }
@@ -82,12 +109,9 @@ function RemoveWidgeticon {
         Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 
-}
 
-function RemoveSearchIcon {
     Write-Host "Removing search on Taskbar" -ForegroundColor Red
     $SearchKeyPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Search"
-
     if(Test-Path $explorerPath) {
         Set-ItemProperty -Path $SearchKeyPath -Name SearchboxTaskbarMode -Value 0
     }
@@ -97,6 +121,7 @@ function RemoveSearchIcon {
     }
 
 }
+
 
 function DisableVBS {
     Write-Host "Disabling Virtualization based Security" -ForegroundColor Red
@@ -114,26 +139,4 @@ function DisableVBS {
 
 
 
-write-host -nonewline "Set Start Menu to Left?(Y/N)"
-$response = read-host
-if ( $response -match "[Y/y]" ) { SetLeftStart }
-
-write-host -nonewline "Remove chat from Start?(Y/N)"
-$response = read-host
-if ( $response -match "[Y/y]" ) { RemoveChat }
-
-write-host -nonewline "Remove Search from Taskbar?(Y/N)"
-$response = read-host
-if ( $response -match "[Y/y]" ) { RemoveSearchIcon }
-
-write-host -nonewline "Remove Taskview Button from Taskbar?(Y/N)"
-$response = read-host
-if ( $response -match "[Y/y]" ) { RemoveTaskView }
-
-write-host -nonewline "Remove Widget Button from Taskbar?(Y/N)"
-$response = read-host
-if ( $response -match "[Y/y]" ) { RemoveWidgeticon }
-
-write-host -nonewline "Disable VBS?(Y/N)"
-$response = read-host
-if ( $response -match "[Y/y]" ) { DisableVBS }
+[void]$DebloatWindows11.ShowDialog()
