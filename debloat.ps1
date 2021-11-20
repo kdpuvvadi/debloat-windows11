@@ -41,36 +41,45 @@ Else {
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
-$DebloatWindows11               = New-Object system.Windows.Forms.Form
-$DebloatWindows11.ClientSize    = New-Object System.Drawing.Point(600,500)
-$DebloatWindows11.text          = "Debloat Windows 11"
-$DebloatWindows11.TopMost       = $false
-$DebloatWindows11.BackColor     = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
-
-$TaskbarLable                    = New-Object system.Windows.Forms.Label
-$TaskbarLable.text               = "Taskbar"
-$TaskbarLable.AutoSize           = $true
-$TaskbarLable.width              = 25
-$TaskbarLable.height             = 39
-$TaskbarLable.location           = New-Object System.Drawing.Point(22,21)
-$TaskbarLable.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',15,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
-$TaskbarLable.ForeColor          = [System.Drawing.ColorTranslator]::FromHtml("#857bfc")
+$DebloatWindows11                = New-Object system.Windows.Forms.Form
+$DebloatWindows11.ClientSize     = New-Object System.Drawing.Point(600,500)
+$DebloatWindows11.text           = "Debloat Windows 11"
+$DebloatWindows11.TopMost        = $false
+$DebloatWindows11.BackColor      = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
 
 $unpin                           = New-Object system.Windows.Forms.Button
-$unpin.text                      = "unpin Taskbar icons"
-$unpin.width                     = 161
-$unpin.height                    = 39
-$unpin.location                  = New-Object System.Drawing.Point(19,51)
+$unpin.text                      = "Taskbar icons"
+$unpin.width                     = 150
+$unpin.height                    = 44
+$unpin.location                  = New-Object System.Drawing.Point(29,29)
 $unpin.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-$DebloatWindows11.controls.AddRange(@($TaskbarLable,$unpin))
+$disablecortana                  = New-Object system.Windows.Forms.Button
+$disablecortana.text             = "Cortana"
+$disablecortana.width            = 150
+$disablecortana.height           = 44
+$disablecortana.location         = New-Object System.Drawing.Point(183,29)
+$disablecortana.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$vbs                             = New-Object system.Windows.Forms.Button
+$vbs.text                        = "VBS"
+$vbs.width                       = 150
+$vbs.height                      = 44
+$vbs.location                    = New-Object System.Drawing.Point(372,29)
+$vbs.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$DebloatWindows11.controls.AddRange(@($unpin,$Button1,$vbs))
 
 $unpin.Add_Click({ removeTaskIcon })
+$disablecortana.Add_Click({ cortana })
+$vbs.Add_Click({ DisableVBS })
 
 #Write your logic code here
 
 
 function removeTaskIcon {
+    $ErrorActionPreference = 'silentlycontinue'
+
     $explorerPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 
     Write-Host "Setting Start Menu to Left" -ForegroundColor Red
@@ -126,12 +135,33 @@ function removeTaskIcon {
     if(Test-Path $edgeKeyPath) {
         Remove-Item $edgeKeyPath -Recurse -Force
     }
-    Stop-Process -Processname Explorer -WarningAction SilentlyContinue -ErrorAction SilentlyContinue -Force
+    Stop-Process -Processname Explorer -WarningAction SilentlyContinue -Force
     Start-Sleep 5
-    Start-Process -Processname Explorer -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
+    Start-Process -Processname Explorer -WarningAction SilentlyContinue
     Start-Sleep 2
+    Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
 }
 
+Function cortana {
+    Write-Host "Disabling Cortana"
+    $Cortana1 = "HKCU:\SOFTWARE\Microsoft\Personalization\Settings"
+    $Cortana2 = "HKCU:\SOFTWARE\Microsoft\InputPersonalization"
+    $Cortana3 = "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore"
+    If (!(Test-Path $Cortana1)) {
+        New-Item $Cortana1
+    }
+    Set-ItemProperty $Cortana1 AcceptedPrivacyPolicy -Value 0 
+    If (!(Test-Path $Cortana2)) {
+        New-Item $Cortana2
+    }
+    Set-ItemProperty $Cortana2 RestrictImplicitTextCollection -Value 1 
+    Set-ItemProperty $Cortana2 RestrictImplicitInkCollection -Value 1 
+    If (!(Test-Path $Cortana3)) {
+        New-Item $Cortana3
+    }
+    Set-ItemProperty $Cortana3 HarvestContacts -Value 0
+    
+}
 
 function DisableVBS {
     Write-Host "Disabling Virtualization based Security" -ForegroundColor Red
