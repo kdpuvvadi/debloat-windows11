@@ -68,7 +68,7 @@ $vbs.height                      = 44
 $vbs.location                    = New-Object System.Drawing.Point(390,29)
 $vbs.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-$DebloatWindows11.controls.AddRange(@($unpin,$Button1,$vbs))
+$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs))
 
 $unpin.Add_Click({ removeTaskIcon })
 $disablecortana.Add_Click({ cortana })
