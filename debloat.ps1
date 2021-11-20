@@ -58,14 +58,14 @@ $disablecortana                  = New-Object system.Windows.Forms.Button
 $disablecortana.text             = "Cortana"
 $disablecortana.width            = 150
 $disablecortana.height           = 44
-$disablecortana.location         = New-Object System.Drawing.Point(183,29)
+$disablecortana.location         = New-Object System.Drawing.Point(210,29)
 $disablecortana.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $vbs                             = New-Object system.Windows.Forms.Button
 $vbs.text                        = "VBS"
 $vbs.width                       = 150
 $vbs.height                      = 44
-$vbs.location                    = New-Object System.Drawing.Point(372,29)
+$vbs.location                    = New-Object System.Drawing.Point(390,29)
 $vbs.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $DebloatWindows11.controls.AddRange(@($unpin,$Button1,$vbs))
