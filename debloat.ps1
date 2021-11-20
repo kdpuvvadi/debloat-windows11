@@ -138,12 +138,12 @@ function removeTaskIcon {
     Stop-Process -Processname Explorer -WarningAction SilentlyContinue -Force
     Start-Sleep 5
     Start-Process -Processname Explorer -WarningAction SilentlyContinue
-    Start-Sleep 2
+    Start-Sleep 1
     Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
 }
 
 Function cortana {
-    Write-Host "Disabling Cortana"
+    Write-Host "Disabling Cortana" -ForegroundColor Red 
     $Cortana1 = "HKCU:\SOFTWARE\Microsoft\Personalization\Settings"
     $Cortana2 = "HKCU:\SOFTWARE\Microsoft\InputPersonalization"
     $Cortana3 = "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore"
@@ -160,7 +160,7 @@ Function cortana {
         New-Item $Cortana3
     }
     Set-ItemProperty $Cortana3 HarvestContacts -Value 0
-    
+    Write-Host "Done" -ForegroundColor Red -BackgroundColor White `n
 }
 
 function DisableVBS {
