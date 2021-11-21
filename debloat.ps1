@@ -201,7 +201,8 @@ function DarkMode {
     Start-Sleep 2
     Set-ItemProperty -Path $DarkModePath -Name AppsUseLightTheme -Value 0
     Set-ItemProperty -Path $DarkModePath -Name SystemUsesLightTheme -Value 0
-    Write-Host "Done" -ForegroundColor Green -BackgroundColor White `n
+    Write-Host "Done" -ForegroundColor Green -BackgroundColor White
+    Write-Host
 }
 
 function LightMode {
@@ -210,7 +211,74 @@ function LightMode {
     Start-Sleep 2
     Set-ItemProperty -Path $LightModePath -Name AppsUseLightTheme -Value 1
     Set-ItemProperty -Path $LightModePath -Name SystemUsesLightTheme -Value 1
-    Write-Host "Done" -ForegroundColor Green -BackgroundColor White `n
+    Write-Host "Done" -ForegroundColor Green -BackgroundColor White
+    Write-Host 
+}
+
+Function RemoveApps {
+
+    $AppList = @(
+
+        #Unnecessary Windows 11 AppX Apps
+        "Microsoft.BingNews"
+        "Microsoft.GetHelp"
+        "Microsoft.Getstarted"
+        "Microsoft.Messaging"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.MicrosoftOfficeHub"
+        "Microsoft.MicrosoftSolitaireCollection"
+        "Microsoft.NetworkSpeedTest"
+        "Microsoft.News"
+        "Microsoft.Office.Lens"
+        "Microsoft.Office.OneNote"
+        "Microsoft.Office.Sway"
+        "Microsoft.OneConnect"
+        "Microsoft.People"
+        "Microsoft.Print3D"
+        "Microsoft.RemoteDesktop"
+        "Microsoft.SkypeApp"
+        "Microsoft.StorePurchaseApp"
+        "Microsoft.Office.Todo.List"
+        "Microsoft.Whiteboard"
+        "Microsoft.WindowsAlarms"
+        #"Microsoft.WindowsCamera"
+        "microsoft.windowscommunicationsapps"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.WindowsMaps"
+        "Microsoft.WindowsSoundRecorder"
+        "Microsoft.Xbox.TCUI"
+        "Microsoft.XboxApp"
+        "Microsoft.XboxGameOverlay"
+        "Microsoft.XboxIdentityProvider"
+        "Microsoft.XboxSpeechToTextOverlay"
+        "Microsoft.ZuneMusic"
+        "Microsoft.ZuneVideo"
+
+        #Sponsored Windows 11 AppX Apps
+        #Add sponsored/featured apps to remove in the "*AppName*" format
+        "*EclipseManager*"
+        "*ActiproSoftwareLLC*"
+        "*AdobeSystemsIncorporated.AdobePhotoshopExpress*"
+        "*Duolingo-LearnLanguagesforFree*"
+        "*PandoraMediaInc*"
+        "*CandyCrush*"
+        "*BubbleWitch3Saga*"
+        "*Wunderlist*"
+        "*Flipboard*"
+        "*Twitter*"
+        "*Facebook*"
+        "*Spotify*"
+        "*Minecraft*"
+        "*Royal Revolt*"
+        "*Sway*"
+        "*Speed Test*"
+        "*Dolby*"
+    )
+    foreach ($App in $AppList) {
+        Get-AppxPackage -Name $App| Remove-AppxPackage
+        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $App | Remove-AppxProvisionedPackage -Online
+        Write-Output "Trying to remove $Bloat."
+    }
 }
 
 
