@@ -68,11 +68,28 @@ $vbs.height                      = 44
 $vbs.location                    = New-Object System.Drawing.Point(390,29)
 $vbs.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs))
+$DMode                           = New-Object system.Windows.Forms.Button
+$DMode.text                      = "Dark Mode"
+$DMode.width                     = 150
+$DMode.height                    = 44
+$DMode.location                  = New-Object System.Drawing.Point(29,75)
+$DMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$LMode                           = New-Object system.Windows.Forms.Button
+$LMode.text                      = "Light Mode"
+$LMode.width                     = 150
+$LMode.height                    = 44
+$LMode.location                  = New-Object System.Drawing.Point(210,75)
+$LMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+
+$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode))
 
 $unpin.Add_Click({ removeTaskIcon })
 $disablecortana.Add_Click({ cortana })
 $vbs.Add_Click({ DisableVBS })
+$DMode.Add_Click({ DarkMode })
+$LMode.Add_Click({ LightMode })
 
 #Write your logic code here
 
@@ -177,6 +194,30 @@ function DisableVBS {
 
 }
 
+
+function DarkMode {
+    Write-Host "Enabling Darkmode. Please wait..." -ForegroundColor Red
+    $DarkModePath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+    $DarkModeName = "AppsUseLightTheme "
+    Start-Sleep 2
+    if ( Test-Path $DarkModePath ) {
+        Set-ItemProperty -Path $DarkModePath -Name $DarkModeName -Value 0
+        Write-Host "Done" -ForegroundColor Green -BackgroundColor White `n
+    }
+    
+}
+
+function LightMode {
+    Write-Host "Enabling Light mode. Please wait..." -ForegroundColor Red
+    $LightModePath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+    $LightModeName = "AppsUseLightTheme "
+    Start-Sleep 2
+    if ( Test-Path $LightModePath ) {
+        Set-ItemProperty -Path $LightModePath -Name $LightModeName -Value 1
+        Write-Host "Done" -ForegroundColor Green -BackgroundColor White `n
+    }
+    
+}
 
 
 [void]$DebloatWindows11.ShowDialog()
