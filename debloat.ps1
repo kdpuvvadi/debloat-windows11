@@ -82,14 +82,21 @@ $LMode.height                    = 44
 $LMode.location                  = New-Object System.Drawing.Point(210,75)
 $LMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
+$ListApps                        = New-Object system.Windows.Forms.Button
+$ListApps.text                   = "Light Mode"
+$ListApps.width                  = 150
+$ListApps.height                 = 44
+$ListApps.location               = New-Object System.Drawing.Point(390,75)
+$ListApps.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode))
+$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode,$ListApps))
 
 $unpin.Add_Click({ removeTaskIcon })
 $disablecortana.Add_Click({ cortana })
 $vbs.Add_Click({ DisableVBS })
 $DMode.Add_Click({ DarkMode })
 $LMode.Add_Click({ LightMode })
+$ListApps.Add_Click({ RemoveApps })
 
 #Write your logic code here
 
