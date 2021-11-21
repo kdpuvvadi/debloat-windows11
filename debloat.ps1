@@ -197,16 +197,16 @@ function DisableVBS {
 
 function DarkMode {
     Write-Host "Enabling Darkmode. Please wait..." -ForegroundColor Red
-    $DarkModePath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+    $DarkModePath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
     Start-Sleep 2
-    Set-ItemProperty -Path $DarkModePath -Name AppsUseLightTheme -Value 2
+    Set-ItemProperty -Path $DarkModePath -Name AppsUseLightTheme -Value 0
     Set-ItemProperty -Path $DarkModePath -Name SystemUsesLightTheme -Value 0
     Write-Host "Done" -ForegroundColor Green -BackgroundColor White `n
 }
 
 function LightMode {
     Write-Host "Enabling Light mode. Please wait..." -ForegroundColor Red
-    $LightModePath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+    $LightModePath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
     Start-Sleep 2
     Set-ItemProperty -Path $LightModePath -Name AppsUseLightTheme -Value 1
     Set-ItemProperty -Path $LightModePath -Name SystemUsesLightTheme -Value 1
