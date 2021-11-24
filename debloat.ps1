@@ -51,42 +51,42 @@ $unpin                           = New-Object system.Windows.Forms.Button
 $unpin.text                      = "Taskbar icons"
 $unpin.width                     = 150
 $unpin.height                    = 44
-$unpin.location                  = New-Object System.Drawing.Point(29,29)
+$unpin.location                  = New-Object System.Drawing.Point(30,30)
 $unpin.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $disablecortana                  = New-Object system.Windows.Forms.Button
 $disablecortana.text             = "Cortana"
 $disablecortana.width            = 150
 $disablecortana.height           = 44
-$disablecortana.location         = New-Object System.Drawing.Point(210,29)
+$disablecortana.location         = New-Object System.Drawing.Point(210,30)
 $disablecortana.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $vbs                             = New-Object system.Windows.Forms.Button
 $vbs.text                        = "VBS"
 $vbs.width                       = 150
 $vbs.height                      = 44
-$vbs.location                    = New-Object System.Drawing.Point(390,29)
+$vbs.location                    = New-Object System.Drawing.Point(390,30)
 $vbs.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $DMode                           = New-Object system.Windows.Forms.Button
 $DMode.text                      = "Dark Mode"
 $DMode.width                     = 150
 $DMode.height                    = 44
-$DMode.location                  = New-Object System.Drawing.Point(29,75)
+$DMode.location                  = New-Object System.Drawing.Point(30,90)
 $DMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $LMode                           = New-Object system.Windows.Forms.Button
 $LMode.text                      = "Light Mode"
 $LMode.width                     = 150
 $LMode.height                    = 44
-$LMode.location                  = New-Object System.Drawing.Point(210,75)
+$LMode.location                  = New-Object System.Drawing.Point(210,90)
 $LMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $ListApps                        = New-Object system.Windows.Forms.Button
-$ListApps.text                   = "Light Mode"
+$ListApps.text                   = "Apps"
 $ListApps.width                  = 150
 $ListApps.height                 = 44
-$ListApps.location               = New-Object System.Drawing.Point(390,75)
+$ListApps.location               = New-Object System.Drawing.Point(390,90)
 $ListApps.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode,$ListApps))
