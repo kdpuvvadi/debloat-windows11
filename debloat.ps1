@@ -198,7 +198,12 @@ $Apps.Font                       = New-Object System.Drawing.Font('Microsoft San
 $Apps.ForeColor                  = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
 $Apps.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
-$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode,$ListApps,$LeftMenu,$StartMenu,$EdgePDF,$Privacy,$FileExt,$RemoveKeys))
+$DebloatWindows11.controls.AddRange(@(
+    $unpin,$disablecortana,$vbs,$DMode,
+    $LMode,$ListApps,$LeftMenu,$StartMenu,
+    $EdgePDF,$Privacy,$FileExt,$RemoveKeys,
+    $Label1,$Label2,$Label3,$Label4
+    ))
 
 $unpin.Add_Click({ removeTaskIcon })
 $disablecortana.Add_Click({ cortana })
