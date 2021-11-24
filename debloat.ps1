@@ -117,6 +117,13 @@ $Privacy.height                  = 45
 $Privacy.location                = New-Object System.Drawing.Point(30,210)
 $Privacy.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
+$FileExt                         = New-Object system.Windows.Forms.Button
+$FileExt.text                    = "Provacy"
+$FileExt.width                   = 150
+$FileExt.height                  = 45
+$FileExt.location                = New-Object System.Drawing.Point(210,210)
+$FileExt.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
 $DebloatWindows11.controls.AddRange
     (
         @(
@@ -129,7 +136,8 @@ $DebloatWindows11.controls.AddRange
             $LeftMenu,
             $StartMenu,
             $EdgePDF,
-            $Privacy
+            $Privacy,
+            $FileExt
     ))
 
 $unpin.Add_Click({ removeTaskIcon })
@@ -142,8 +150,22 @@ $LeftMenu.Add_Click({ leftMenu })
 $StartMenu.Add_Click({ UnpinStart })
 $EdgePDF.Add_Click({ Stop-EdgePDF })
 $Privacy.Add_Click({ Protect-Privacy })
+$FileExt.Add_Click({ ShowFileExt })
 
 #Write your logic code here
+
+function ShowFileExt {
+    
+    Write-Output "Enabling File Extenstions" -ForegroundColor Red
+    $ExpPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+    if (Test-Path $ExpPath ) {
+        Set-ItemProperty -Path $ExpPath -Name HideFileExt -Value 0
+    }
+    $extStatus = Get-ItemProperty $ExpPath -Name HideFileExt
+    if ( $extStatus -eq 0 ) {
+        Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
+    }
+}
 
 Function Protect-Privacy {
             
@@ -284,6 +306,7 @@ Function Protect-Privacy {
         Remove-Item $CloudStore -Recurse -Force
         Start-Process Explorer.exe -Wait
     }
+    Clear-Host
 }
 
 Function Stop-EdgePDF {
@@ -317,6 +340,7 @@ Function Stop-EdgePDF {
     If (Test-Path $Edge) {
         Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
     }
+    Clear-Host
 }
 
 function leftMenu {
