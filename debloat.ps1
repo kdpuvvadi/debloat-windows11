@@ -43,111 +43,162 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $DebloatWindows11                = New-Object system.Windows.Forms.Form
-$DebloatWindows11.ClientSize     = New-Object System.Drawing.Point(600,500)
+$DebloatWindows11.ClientSize     = New-Object System.Drawing.Point(800,700)
 $DebloatWindows11.text           = "Debloat Windows 11"
 $DebloatWindows11.TopMost        = $false
-$DebloatWindows11.BackColor      = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+
+$Label1                          = New-Object system.Windows.Forms.Label
+$Label1.text                     = "Taskbar & Start Menu"
+$Label1.AutoSize                 = $true
+$Label1.width                    = 40
+$Label1.height                   = 20
+$Label1.location                 = New-Object System.Drawing.Point(20,20)
+$Label1.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
 
 $unpin                           = New-Object system.Windows.Forms.Button
-$unpin.text                      = "Taskbar icons"
+$unpin.text                      = "Unpin Taskbar"
 $unpin.width                     = 150
 $unpin.height                    = 45
-$unpin.location                  = New-Object System.Drawing.Point(30,30)
+$unpin.location                  = New-Object System.Drawing.Point(20,70)
 $unpin.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-
-$disablecortana                  = New-Object system.Windows.Forms.Button
-$disablecortana.text             = "Cortana"
-$disablecortana.width            = 150
-$disablecortana.height           = 45
-$disablecortana.location         = New-Object System.Drawing.Point(210,30)
-$disablecortana.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-
-$vbs                             = New-Object system.Windows.Forms.Button
-$vbs.text                        = "VBS"
-$vbs.width                       = 150
-$vbs.height                      = 45
-$vbs.location                    = New-Object System.Drawing.Point(390,30)
-$vbs.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-
-$DMode                           = New-Object system.Windows.Forms.Button
-$DMode.text                      = "Dark Mode"
-$DMode.width                     = 150
-$DMode.height                    = 45
-$DMode.location                  = New-Object System.Drawing.Point(30,90)
-$DMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-
-$LMode                           = New-Object system.Windows.Forms.Button
-$LMode.text                      = "Light Mode"
-$LMode.width                     = 150
-$LMode.height                    = 45
-$LMode.location                  = New-Object System.Drawing.Point(210,90)
-$LMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-
-$ListApps                        = New-Object system.Windows.Forms.Button
-$ListApps.text                   = "Apps"
-$ListApps.width                  = 150
-$ListApps.height                 = 45
-$ListApps.location               = New-Object System.Drawing.Point(390,90)
-$ListApps.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$unpin.ForeColor                 = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$unpin.BackColor                 = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
 $LeftMenu                        = New-Object system.Windows.Forms.Button
 $LeftMenu.text                   = "Start to Left"
 $LeftMenu.width                  = 150
 $LeftMenu.height                 = 45
-$LeftMenu.location               = New-Object System.Drawing.Point(30,150)
+$LeftMenu.location               = New-Object System.Drawing.Point(220,70)
 $LeftMenu.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$LeftMenu.ForeColor              = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$LeftMenu.BackColor              = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
 $StartMenu                       = New-Object system.Windows.Forms.Button
-$StartMenu.text                  = "Unpin from Start"
+$StartMenu.text                  = "Unpin Start Menu"
 $StartMenu.width                 = 150
 $StartMenu.height                = 45
-$StartMenu.location              = New-Object System.Drawing.Point(210,150)
+$StartMenu.location              = New-Object System.Drawing.Point(420,70)
 $StartMenu.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$StartMenu.ForeColor             = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$StartMenu.BackColor             = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
+$Label2                          = New-Object system.Windows.Forms.Label
+$Label2.text                     = "APPEARANCE"
+$Label2.AutoSize                 = $true
+$Label2.visible                  = $false
+$Label2.enabled                  = $false
+$Label2.width                    = 40
+$Label2.height                   = 20
+$Label2.location                 = New-Object System.Drawing.Point(20,150)
+$Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
+
+$DMode                           = New-Object system.Windows.Forms.Button
+$DMode.text                      = "Enable Dark Mode"
+$DMode.width                     = 150
+$DMode.height                    = 45
+$DMode.location                  = New-Object System.Drawing.Point(20,200)
+$DMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$DMode.ForeColor                 = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$DMode.BackColor                 = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
+$LMode                           = New-Object system.Windows.Forms.Button
+$LMode.text                      = "Enable Light Mode"
+$LMode.width                     = 150
+$LMode.height                    = 45
+$LMode.location                  = New-Object System.Drawing.Point(220,200)
+$LMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$LMode.ForeColor                 = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$LMode.BackColor                 = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
+$Label3                          = New-Object system.Windows.Forms.Label
+$Label3.text                     = "Bloatware"
+$Label3.AutoSize                 = $true
+$Label3.width                    = 40
+$Label3.height                   = 20
+$Label3.location                 = New-Object System.Drawing.Point(20,280)
+$Label3.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
+
+$disablecortana                  = New-Object system.Windows.Forms.Button
+$disablecortana.text             = "Disable Cortana"
+$disablecortana.width            = 150
+$disablecortana.height           = 45
+$disablecortana.location         = New-Object System.Drawing.Point(20,330)
+$disablecortana.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$disablecortana.ForeColor        = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$disablecortana.BackColor        = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
+$vbs                             = New-Object system.Windows.Forms.Button
+$vbs.text                        = "Disable VBS"
+$vbs.width                       = 150
+$vbs.height                      = 45
+$vbs.location                    = New-Object System.Drawing.Point(220,330)
+$vbs.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$vbs.ForeColor                   = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$vbs.BackColor                   = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
+$ListApps                        = New-Object system.Windows.Forms.Button
+$ListApps.text                   = "Uninstall Apps"
+$ListApps.width                  = 150
+$ListApps.height                 = 45
+$ListApps.location               = New-Object System.Drawing.Point(420,330)
+$ListApps.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$ListApps.ForeColor              = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$ListApps.BackColor              = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
+$Privacy                         = New-Object system.Windows.Forms.Button
+$Privacy.text                    = "Privacy"
+$Privacy.width                   = 150
+$Privacy.height                  = 45
+$Privacy.location                = New-Object System.Drawing.Point(620,330)
+$Privacy.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$Privacy.ForeColor               = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$Privacy.BackColor               = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
+$Label4                          = New-Object system.Windows.Forms.Label
+$Label4.text                     = "Extras"
+$Label4.AutoSize                 = $true
+$Label4.width                    = 40
+$Label4.height                   = 20
+$Label4.location                 = New-Object System.Drawing.Point(20,502)
+$Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
 
 $EdgePDF                         = New-Object system.Windows.Forms.Button
 $EdgePDF.text                    = "Edge PDF"
 $EdgePDF.width                   = 150
 $EdgePDF.height                  = 45
-$EdgePDF.location                = New-Object System.Drawing.Point(390,150)
+$EdgePDF.location                = New-Object System.Drawing.Point(20,552)
 $EdgePDF.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-
-$Privacy                         = New-Object system.Windows.Forms.Button
-$Privacy.text                    = "Provacy"
-$Privacy.width                   = 150
-$Privacy.height                  = 45
-$Privacy.location                = New-Object System.Drawing.Point(30,210)
-$Privacy.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$EdgePDF.ForeColor               = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$EdgePDF.BackColor               = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
 $FileExt                         = New-Object system.Windows.Forms.Button
-$FileExt.text                    = "Provacy"
+$FileExt.text                    = "File Extensions"
 $FileExt.width                   = 150
 $FileExt.height                  = 45
-$FileExt.location                = New-Object System.Drawing.Point(210,210)
+$FileExt.location                = New-Object System.Drawing.Point(220,552)
 $FileExt.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$FileExt.ForeColor               = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$FileExt.BackColor               = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
 $RemoveKeys                      = New-Object system.Windows.Forms.Button
-$RemoveKeys.text                 = "Provacy"
+$RemoveKeys.text                 = "Remove Keys"
 $RemoveKeys.width                = 150
 $RemoveKeys.height               = 45
-$RemoveKeys.location             = New-Object System.Drawing.Point(390,210)
+$RemoveKeys.location             = New-Object System.Drawing.Point(20,425)
 $RemoveKeys.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$RemoveKeys.ForeColor            = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$RemoveKeys.BackColor            = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
-$DebloatWindows11.controls.AddRange
-    (
-        @(
-            $unpin,
-            $disablecortana,
-            $vbs,
-            $DMode,
-            $LMode,
-            $ListApps.
-            $LeftMenu,
-            $StartMenu,
-            $EdgePDF,
-            $Privacy,
-            $FileExt,
-            $RemoveKeys
-    ))
+$Apps                            = New-Object system.Windows.Forms.Button
+$Apps.text                       = "Install Apps"
+$Apps.width                      = 150
+$Apps.height                     = 45
+$Apps.location                   = New-Object System.Drawing.Point(420,552)
+$Apps.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$Apps.ForeColor                  = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$Apps.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
+$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode,$ListApps,$LeftMenu,$StartMenu,$EdgePDF,$Privacy,$FileExt,$RemoveKeys))
 
 $unpin.Add_Click({ removeTaskIcon })
 $disablecortana.Add_Click({ cortana })
@@ -161,6 +212,7 @@ $EdgePDF.Add_Click({ Stop-EdgePDF })
 $Privacy.Add_Click({ Protect-Privacy })
 $FileExt.Add_Click({ ShowFileExt })
 $RemoveKeys.Add_Click({ Remove-Keys })
+$Apps.Add_Click({ InstallApps })
 
 #Write your logic code here
 
