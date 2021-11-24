@@ -653,7 +653,12 @@ Function Remove-Keys {
 }
 
 function InstallApps {
+
+    $Warn = [Windows.MessageBoxImage]::Warning
+    $Button = [Windows.MessageBoxButton]::YesNoCancel
+
     $InstallNET = "Do you want to install .NET 3.5?"
+    $InstallWinget = "Do you want to install Winget Package Manager"
 
     $Prompt1 = [Windows.MessageBox]::Show($InstallNET, "Install .Net", $Button, $Warn)
         Switch ($Prompt1) {
@@ -665,7 +670,22 @@ function InstallApps {
             No {
                 Write-Host "Skipping .NET install."
             }
-        }    
+        }
+
+    $Prompt2 = [Windows.MessageBox]::Show($InstallWinget, "Install Winget", $Button, $Warn)
+    $wingetURI = 'https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle'
+    
+    Switch ($Prompt2) {
+        Yes {
+            Write-Host "Downloading the winget package"
+            Invoke-WebRequest -Uri $wingetURI -OutFile $env:TEMP/winget.msixbundle
+            Add-AppPackage -Path $env:TEMP/winget.msixbundle
+            Write-Host "winget has been successfully installed!"
+        }
+        No {
+            Write-Host "Skipping winget install."
+        }
+    } 
 }
 
 [void]$DebloatWindows11.ShowDialog()
