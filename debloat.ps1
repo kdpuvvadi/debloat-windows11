@@ -199,7 +199,7 @@ $Apps.ForeColor                  = [System.Drawing.ColorTranslator]::FromHtml("#
 $Apps.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
 $DebloatWindows11.controls.AddRange(@(
-    $unpin,$disablecortana,$vbs,$DMode,
+    $unpin,$disablecortana,$vbs,$DMode,$Apps,
     $LMode,$ListApps,$LeftMenu,$StartMenu,
     $EdgePDF,$Privacy,$FileExt,$RemoveKeys,
     $Label1,$Label2,$Label3,$Label4
