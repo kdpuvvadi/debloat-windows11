@@ -50,46 +50,54 @@ $DebloatWindows11.BackColor      = [System.Drawing.ColorTranslator]::FromHtml("#
 $unpin                           = New-Object system.Windows.Forms.Button
 $unpin.text                      = "Taskbar icons"
 $unpin.width                     = 150
-$unpin.height                    = 44
+$unpin.height                    = 45
 $unpin.location                  = New-Object System.Drawing.Point(30,30)
 $unpin.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $disablecortana                  = New-Object system.Windows.Forms.Button
 $disablecortana.text             = "Cortana"
 $disablecortana.width            = 150
-$disablecortana.height           = 44
+$disablecortana.height           = 45
 $disablecortana.location         = New-Object System.Drawing.Point(210,30)
 $disablecortana.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $vbs                             = New-Object system.Windows.Forms.Button
 $vbs.text                        = "VBS"
 $vbs.width                       = 150
-$vbs.height                      = 44
+$vbs.height                      = 45
 $vbs.location                    = New-Object System.Drawing.Point(390,30)
 $vbs.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $DMode                           = New-Object system.Windows.Forms.Button
 $DMode.text                      = "Dark Mode"
 $DMode.width                     = 150
-$DMode.height                    = 44
+$DMode.height                    = 45
 $DMode.location                  = New-Object System.Drawing.Point(30,90)
 $DMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $LMode                           = New-Object system.Windows.Forms.Button
 $LMode.text                      = "Light Mode"
 $LMode.width                     = 150
-$LMode.height                    = 44
+$LMode.height                    = 45
 $LMode.location                  = New-Object System.Drawing.Point(210,90)
 $LMode.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $ListApps                        = New-Object system.Windows.Forms.Button
 $ListApps.text                   = "Apps"
 $ListApps.width                  = 150
-$ListApps.height                 = 44
+$ListApps.height                 = 45
 $ListApps.location               = New-Object System.Drawing.Point(390,90)
 $ListApps.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode,$ListApps))
+$LeftMenu                        = New-Object system.Windows.Forms.Button
+$LeftMenu.text                   = "Start to Left"
+$LeftMenu.width                  = 150
+$LeftMenu.height                 = 45
+$LeftMenu.location               = New-Object System.Drawing.Point(30,150)
+$LeftMenu.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+
+$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode,$ListApps.$LeftMenu))
 
 $unpin.Add_Click({ removeTaskIcon })
 $disablecortana.Add_Click({ cortana })
@@ -97,11 +105,11 @@ $vbs.Add_Click({ DisableVBS })
 $DMode.Add_Click({ DarkMode })
 $LMode.Add_Click({ LightMode })
 $ListApps.Add_Click({ RemoveApps })
+$LeftMenu.Add_Click({ leftMenu })
 
 #Write your logic code here
 
-
-function removeTaskIcon {
+function leftMenu {
     $ErrorActionPreference = 'silentlycontinue'
 
     $explorerPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
@@ -114,6 +122,12 @@ function removeTaskIcon {
     if( $checkStart.TaskbarAl -eq 0 ) {
         Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
+}
+
+function removeTaskIcon {
+    $ErrorActionPreference = 'silentlycontinue'
+
+    $explorerPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 
     Write-Host "Setting Start Menu to Left" -ForegroundColor Red
     if(Test-Path $explorerPath) {
