@@ -30,6 +30,7 @@ Else {
     Start-Sleep 1
 }
 
+Add-Type -AssemblyName PresentationFramework
 
 # GUI Start Here
 
@@ -651,5 +652,20 @@ Function Remove-Keys {
     Clear-Host
 }
 
+function InstallApps {
+    $InstallNET = "Do you want to install .NET 3.5?"
+
+    $Prompt1 = [Windows.MessageBox]::Show($InstallNET, "Install .Net", $Button, $Warn)
+        Switch ($Prompt1) {
+            Yes {
+                Write-Host "Initializing the installation of .NET 3.5..."
+                DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
+                Write-Host ".NET 3.5 has been successfully installed!"
+            }
+            No {
+                Write-Host "Skipping .NET install."
+            }
+        }    
+}
 
 [void]$DebloatWindows11.ShowDialog()
