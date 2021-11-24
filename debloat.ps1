@@ -470,7 +470,7 @@ function removeTaskIcon {
 
     # Remove edge taskbar icon
     Write-Host "Removing Microsft Edge from taskbar" -ForegroundColor Red
-    $edgeKeyPath = "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband"
+    $edgeKeyPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband"
     if(Test-Path $edgeKeyPath) {
         Remove-Item $edgeKeyPath -Recurse -Force
     }
