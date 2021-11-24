@@ -96,14 +96,21 @@ $LeftMenu.height                 = 45
 $LeftMenu.location               = New-Object System.Drawing.Point(30,150)
 $LeftMenu.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-$StartMenu                        = New-Object system.Windows.Forms.Button
-$StartMenu.text                   = "Unpin from Start"
-$StartMenu.width                  = 150
-$StartMenu.height                 = 45
-$StartMenu.location               = New-Object System.Drawing.Point(210,150)
-$StartMenu.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$StartMenu                       = New-Object system.Windows.Forms.Button
+$StartMenu.text                  = "Unpin from Start"
+$StartMenu.width                 = 150
+$StartMenu.height                = 45
+$StartMenu.location              = New-Object System.Drawing.Point(210,150)
+$StartMenu.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode,$ListApps.$LeftMenu,$StartMenu))
+$EdgePDF                         = New-Object system.Windows.Forms.Button
+$EdgePDF.text                    = "Edge PDF"
+$EdgePDF.width                   = 150
+$EdgePDF.height                  = 45
+$EdgePDF.location                = New-Object System.Drawing.Point(390,150)
+$EdgePDF.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$DebloatWindows11.controls.AddRange(@($unpin,$disablecortana,$vbs,$DMode,$LMode,$ListApps.$LeftMenu,$StartMenu,$EdgePDF))
 
 $unpin.Add_Click({ removeTaskIcon })
 $disablecortana.Add_Click({ cortana })
@@ -113,8 +120,42 @@ $LMode.Add_Click({ LightMode })
 $ListApps.Add_Click({ RemoveApps })
 $LeftMenu.Add_Click({ leftMenu })
 $StartMenu.Add_Click({ UnpinStart })
+$EdgePDF.Add_Click({ Stop-EdgePDF })
 
 #Write your logic code here
+
+Function Stop-EdgePDF {
+    
+    #Stops edge from taking over as the default .PDF viewer    
+    Write-Output "Stopping Edge from taking over as the default .PDF viewer"
+    $NoPDF = "HKCR:\.pdf"
+    $NoProgids = "HKCR:\.pdf\OpenWithProgids"
+    $NoWithList = "HKCR:\.pdf\OpenWithList" 
+    If (!(Get-ItemProperty $NoPDF  NoOpenWith)) {
+        New-ItemProperty $NoPDF NoOpenWith 
+    }        
+    If (!(Get-ItemProperty $NoPDF  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoPDF  NoStaticDefaultVerb 
+    }        
+    If (!(Get-ItemProperty $NoProgids  NoOpenWith)) {
+        New-ItemProperty $NoProgids  NoOpenWith 
+    }        
+    If (!(Get-ItemProperty $NoProgids  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoProgids  NoStaticDefaultVerb 
+    }        
+    If (!(Get-ItemProperty $NoWithList  NoOpenWith)) {
+        New-ItemProperty $NoWithList  NoOpenWith
+    }        
+    If (!(Get-ItemProperty $NoWithList  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoWithList  NoStaticDefaultVerb 
+    }
+            
+    #Appends an underscore '_' to the Registry key for Edge
+    $Edge = "HKCR:\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_"
+    If (Test-Path $Edge) {
+        Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
+    }
+}
 
 function leftMenu {
     $ErrorActionPreference = 'silentlycontinue'
