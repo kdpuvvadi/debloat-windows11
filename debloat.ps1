@@ -1,4 +1,3 @@
-
 # Windows 11 Debloater
 
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
@@ -9,11 +8,9 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 
 $GetOSVersion = (Get-ItemProperty  -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion").DisplayVersion
-
 if ($GetOSVersion -ne '21H2') {
     throw "debloat-windows11 only works on Windows 11"
 }
-
 
 Clear-Host
 
@@ -48,7 +45,7 @@ $DebloatWindows11.text           = "Debloat Windows 11"
 $DebloatWindows11.TopMost        = $false
 
 $Label1                          = New-Object system.Windows.Forms.Label
-$Label1.text                     = "Taskbar & Start Menu"
+$Label1.text                     = "Taskbar and Start Menu"
 $Label1.AutoSize                 = $true
 $Label1.width                    = 40
 $Label1.height                   = 20
@@ -205,11 +202,21 @@ $OneDrive.Font                   = New-Object System.Drawing.Font('Microsoft San
 $OneDrive.ForeColor              = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
 $OneDrive.BackColor              = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
+$3DDir                           = New-Object system.Windows.Forms.Button
+$3DDir.text                      = "Remove 3D Objects Directory"
+$3DDir.width                     = 150
+$3DDir.height                    = 50
+$3DDir.location                  = New-Object System.Drawing.Point(420,425)
+$3DDir.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$3DDir.ForeColor                 = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$3DDir.BackColor                 = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
 $DebloatWindows11.controls.AddRange(@(
     $unpin,$disablecortana,$vbs,$DMode,$Apps,
     $LMode,$ListApps,$LeftMenu,$StartMenu,
     $EdgePDF,$Privacy,$FileExt,$RemoveKeys,
-    $Label1,$Label2,$Label3,$Label4,$OneDrive
+    $Label1,$Label2,$Label3,$Label4,
+    $OneDrive,$3DDir
     ))
 
 $unpin.Add_Click({ removeTaskIcon })
@@ -226,6 +233,7 @@ $FileExt.Add_Click({ ShowFileExt })
 $RemoveKeys.Add_Click({ Remove-Keys })
 $Apps.Add_Click({ InstallApps })
 $OneDrive.Add_Click({ UninstallOneDrive  })
+$3DDir.Add_Click({ Remove3dObjects })
 
 #Write your logic code here
 
@@ -878,6 +886,28 @@ function InstallApps {
             Write-Host "Skipping winget install."
         }
     } 
+}
+
+Function Remove3dObjects {
+    #Removes 3D Objects from the 'My Computer' submenu in explorer
+    Write-Host "Removing 3D Objects from explorer 'My Computer' submenu"
+    $Objects32 = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}"
+    $Objects64 = "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}"
+    If (Test-Path $Objects32) {
+        Remove-Item $Objects32 -Recurse
+        Stop-Process -ProcessName explorer -Force
+    }
+    If (Test-Path $Objects64) {
+        Remove-Item $Objects64 -Recurse 
+        Stop-Process -ProcessName explorer -Force
+    }
+    if ( 
+	    ( -not (Test-Path $Objects32) ) -and (-not (Test-Path $Objects64)) 
+        ) 
+        {
+            Write-Host "Done"-ForegroundColor Green -BackgroundColor white `n 
+        }
+    Start-Process explorer -Wait
 }
 
 [void]$DebloatWindows11.ShowDialog()
