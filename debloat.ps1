@@ -228,6 +228,9 @@ function ShowFileExt {
     if (Test-Path $ExpPath) {
         Set-ItemProperty -Path $ExpPath -Name HideFileExt -Value 0
     }
+    Stop-Process -ProcessName Explorer -Force
+    Start-Sleep 1
+    Start-Process Explorer -Wait
     $extStatus = Get-ItemProperty $ExpPath -Name HideFileExt
     if ( $extStatus.HideFileExt -eq 0 ) {
         Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
@@ -476,7 +479,7 @@ function removeTaskIcon {
     }
     Stop-Process -Processname Explorer -WarningAction SilentlyContinue -Force
     Start-Sleep 5
-    Start-Process -Processname Explorer -WarningAction SilentlyContinue
+    Start-Process Explorer -Wait -WarningAction SilentlyContinue
     Start-Sleep 1
     Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
 }
