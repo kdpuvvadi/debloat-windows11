@@ -225,11 +225,11 @@ function ShowFileExt {
     
     Write-Output "Enabling File Extenstions" -ForegroundColor Red
     $ExpPath = "HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
-    if (Test-Path $ExpPath ) {
+    if (Test-Path $ExpPath) {
         Set-ItemProperty -Path $ExpPath -Name HideFileExt -Value 0
     }
     $extStatus = Get-ItemProperty $ExpPath -Name HideFileExt
-    if ( $extStatus -eq 0 ) {
+    if ( $extStatus.HideFileExt -eq 0 ) {
         Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
     }
 }
