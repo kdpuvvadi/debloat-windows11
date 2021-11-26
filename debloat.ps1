@@ -83,7 +83,7 @@ $StartMenu.ForeColor             = [System.Drawing.ColorTranslator]::FromHtml("#
 $StartMenu.BackColor             = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
 $Label2                          = New-Object system.Windows.Forms.Label
-$Label2.text                     = "APPEARANCE"
+$Label2.text                     = "Appearance"
 $Label2.AutoSize                 = $true
 $Label2.visible                  = $false
 $Label2.enabled                  = $false
@@ -93,7 +93,7 @@ $Label2.location                 = New-Object System.Drawing.Point(20,150)
 $Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
 
 $DMode                           = New-Object system.Windows.Forms.Button
-$DMode.text                      = "Enable Dark Mode"
+$DMode.text                      = "Dark Mode"
 $DMode.width                     = 150
 $DMode.height                    = 45
 $DMode.location                  = New-Object System.Drawing.Point(20,200)
@@ -102,7 +102,7 @@ $DMode.ForeColor                 = [System.Drawing.ColorTranslator]::FromHtml("#
 $DMode.BackColor                 = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
 $LMode                           = New-Object system.Windows.Forms.Button
-$LMode.text                      = "Enable Light Mode"
+$LMode.text                      = "Light Mode"
 $LMode.width                     = 150
 $LMode.height                    = 45
 $LMode.location                  = New-Object System.Drawing.Point(220,200)
@@ -286,7 +286,7 @@ Function Protect-Privacy {
     Set-ItemProperty $registryOEM  SilentInstalledAppsEnabled -Value 0 
     Set-ItemProperty $registryOEM  SystemPaneSuggestionsEnabled -Value 0          
     
-    #Preping mixed Reality Portal for removal    
+    #Prepping mixed Reality Portal for removal    
     Write-Output "Setting Mixed Reality Portal value to 0 so that you can uninstall it in Settings"
     $Holo = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Holographic"    
     If (Test-Path $Holo) {
@@ -316,7 +316,7 @@ Function Protect-Privacy {
     }
     Set-ItemProperty $Live  NoTileApplicationNotification -Value 1 
         
-    #Turns off Data Collection via the AllowTelemtry key by changing it to 0
+    #Turns off Data Collection via the Allow Telemetry key by changing it to 0
     Write-Output "Turning off Data Collection"
     $DataCollection1 = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
     $DataCollection2 = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
