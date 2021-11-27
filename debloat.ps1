@@ -12,7 +12,11 @@ Else {
     Write-Output "The folder $logsFolder was successfully created." `n
     Start-Sleep 1
 }
-Start-Transcript -OutputDirectory "$logsFolder"
+$logfile = Get-Date -Format "ddMMyyhh"
+$logfilepath =  "$logsFolder/log-$logfile.log"
+Start-Transcript -path $logfilepath -IncludeInvocationHeader -Append
+
+
 Clear-Host
 
 
