@@ -7,25 +7,26 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Exit
 }
 
-$GetOSVersion = (Get-ItemProperty  -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion").DisplayVersion
-if ($GetOSVersion -ne '21H2') {
+$GetOSVersion = (Get-ItemProperty  -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuildNumber
+if ($GetOSVersion -lt '22000') {
     throw "debloat-windows11 only works on Windows 11"
 }
 
-Clear-Host
-
-
 $logsFolder = "$PWD\logs\"
+$logMessage = "The log folder doesn't exist. This folder will be used for storing logs created after the script runs. Creating now."
 If (Test-Path $logsFolder) {
     Write-Output "$logsFolder exists. Skipping."
 }
 Else {
-    Write-Output "The log folder doesn't exist. This folder will be used for storing logs created after the script runs. Creating now."
+    Write-Output $logMessage
     Start-Sleep 1
     New-Item -Path "$logsFolder" -ItemType Directory
     Write-Output "The folder $logsFolder was successfully created." `n
     Start-Sleep 1
 }
+Start-Transcript -OutputDirectory "$logsFolder"
+
+Clear-Host
 
 Add-Type -AssemblyName PresentationFramework
 
