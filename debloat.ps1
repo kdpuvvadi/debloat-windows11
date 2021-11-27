@@ -216,12 +216,21 @@ $3DDir.Font                      = New-Object System.Drawing.Font('Microsoft San
 $3DDir.ForeColor                 = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
 $3DDir.BackColor                 = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
 
+$oldMenu                           = New-Object system.Windows.Forms.Button
+$oldMenu.text                      = "Old Context Menu"
+$oldMenu.width                     = 150
+$oldMenu.height                    = 50
+$oldMenu.location                  = New-Object System.Drawing.Point(420,200)
+$oldMenu.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$oldMenu.ForeColor                 = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$oldMenu.BackColor                 = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
 $DebloatWindows11.controls.AddRange(@(
     $unpin,$disablecortana,$vbs,$DMode,$Apps,
     $LMode,$ListApps,$LeftMenu,$StartMenu,
     $EdgePDF,$Privacy,$FileExt,$RemoveKeys,
     $Label1,$Label2,$Label3,$Label4,
-    $OneDrive,$3DDir
+    $OneDrive,$3DDir,$oldMenu
     ))
 
 $unpin.Add_Click({ removeTaskIcon })
@@ -239,6 +248,7 @@ $RemoveKeys.Add_Click({ Remove-Keys })
 $Apps.Add_Click({ InstallApps })
 $OneDrive.Add_Click({ UninstallOneDrive  })
 $3DDir.Add_Click({ Remove3dObjects })
+$oldMenu.Add_Click({ ContextMenu })
 
 #Write your logic code here
 
@@ -912,5 +922,15 @@ Function Remove3dObjects {
         }
     Start-Process explorer -Wait
 }
+
+function ContextMenu {
+    $menuPath = "HKCU:Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32"
+    New-Item -Path $menuPath -Value $null -Force
+    Stop-Process -Processname Explorer -WarningAction SilentlyContinue -Force
+    Start-Sleep 5
+    Start-Process Explorer -Wait -WarningAction SilentlyContinue
+    Start-Sleep 1
+    Write-Host "Done" -ForegroundColor Green -BackgroundColor white `n
+} 
 
 [void]$DebloatWindows11.ShowDialog()
