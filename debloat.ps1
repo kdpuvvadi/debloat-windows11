@@ -1,15 +1,15 @@
 # Windows 11 Debloater
 
+$GetOSVersion = (Get-ItemProperty  -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuildNumber
+if ($GetOSVersion -lt '22000') {
+    throw "debloat-windows11 only works on Windows 11"
+}
+
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
     Write-Host "You didn't run this script as an Administrator. This script will self elevate to run as an Administrator and continue."
     Start-Sleep 1
     Start-Process powershell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
     Exit
-}
-
-$GetOSVersion = (Get-ItemProperty  -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuildNumber
-if ($GetOSVersion -lt '22000') {
-    throw "debloat-windows11 only works on Windows 11"
 }
 
 $logsFolder = "$PWD\logs\"
@@ -647,8 +647,6 @@ Function cortana {
 }
 
 Function UnpinStart {
-    # https://superuser.com/a/1442733
-    #Requires -RunAsAdministrator
 
 $START_MENU_LAYOUT = @"
 <LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
