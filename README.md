@@ -4,6 +4,12 @@
 Debloat your windows 11 install with ease. 
 Still work in progress. Some features might be missing. 
 
+# Quick run
+
+```powershell
+iwr https://git.io/debloat11|iex
+```
+
 ## Clone the repo
 
 ```Powershell
