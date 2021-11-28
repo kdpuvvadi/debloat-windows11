@@ -921,16 +921,16 @@ function InstallApps {
         
         foreach($app in $apps.GetEnumerator()) {
 
-            $AppPrompt = [Windows.MessageBox]::Show($InstallWinget, $($app.Name), $Button, $Warn)
+            $AppPrompt = [Windows.MessageBox]::Show("Install $($app.Name)", $($app.Name), $Button, $Warn)
 
             Switch ($AppPrompt) {
                 Yes {
                     Write-Host "Installing $($app.Name)"
-                    winget install -i $($app.value)
+                    winget install --id $($app.value) --silent
                     Write-Host "$($app.Name) has been successfully installed!"
                 }
                 No {
-                    Write-Host $($app.Name)
+                    Write-Host "Skipping $($app.Name)"
                 }
             }   
 
