@@ -884,21 +884,58 @@ function InstallApps {
                 Write-Host "Skipping .NET install."
             }
         }
-
-    $Prompt2 = [Windows.MessageBox]::Show($InstallWinget, "Install Winget", $Button, $Warn)
-    $wingetURI = 'https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle'
     
-    Switch ($Prompt2) {
-        Yes {
-            Write-Host "Downloading the winget package"
-            Invoke-WebRequest -Uri $wingetURI -OutFile $env:TEMP/winget.msixbundle
-            Add-AppPackage -Path $env:TEMP/winget.msixbundle
-            Write-Host "winget has been successfully installed!"
-        }
-        No {
-            Write-Host "Skipping winget install."
-        }
+    #check winget installation
+    winget -v -erroraction silentlycontinue
+    if (!$?) { 
+        $Prompt2 = [Windows.MessageBox]::Show($InstallWinget, "Install Winget", $Button, $Warn)
+        $wingetURI = 'https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle'
+    
+        Switch ($Prompt2) {
+            Yes {
+                Write-Host "Downloading the winget package"
+                Invoke-WebRequest -Uri $wingetURI -OutFile $env:TEMP/winget.msixbundle
+                Add-AppPackage -Path $env:TEMP/winget.msixbundle
+                Write-Host "winget has been successfully installed!"
+            }
+            No {
+                Write-Host "Skipping winget install."
+            }
+        } 
     } 
+    winget -v -erroraction silentlycontinue
+    if ($?) { 
+
+        $apps @{
+            'Google Chrome' = 'Google.Google'
+            'Mazilla Firefox' = 'Mozilla.Firefox'
+            '7-Zip' = '7zip.7zip'
+            'VLC Media Player' = 'VideoLAN.VLC'
+            'Notepad++' = 'Notepad++.Notepad++'
+            'Visual Studio Code' = 'Microsoft.VisualStudioCode'
+            'Powertoys' = 'Microsoft.PowerToys'
+            'WinDirStat' = 'WinDirStat.WinDirStat'
+            
+        }
+        
+        foreach($app in $apps.GetEnumerator()) {
+
+            $AppPrompt = [Windows.MessageBox]::Show($InstallWinget, $($app.Name), $Button, $Warn)
+
+            Switch ($AppPrompt) {
+                Yes {
+                    Write-Host "Installing $($app.Name)"
+                    winget install -i $($app.value)
+                    Write-Host "$($app.Name) has been successfully installed!"
+                }
+                No {
+                    Write-Host $($app.Name)
+                }
+            }   
+
+        }
+    }
+    
 }
 
 Function Remove3dObjects {
