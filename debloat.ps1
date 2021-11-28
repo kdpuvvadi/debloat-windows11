@@ -906,7 +906,8 @@ function InstallApps {
     winget -v -erroraction silentlycontinue
     if ($?) { 
 
-        $apps @{
+        $apps = @{
+
             'Google Chrome' = 'Google.Google'
             'Mazilla Firefox' = 'Mozilla.Firefox'
             '7-Zip' = '7zip.7zip'
@@ -915,7 +916,7 @@ function InstallApps {
             'Visual Studio Code' = 'Microsoft.VisualStudioCode'
             'Powertoys' = 'Microsoft.PowerToys'
             'WinDirStat' = 'WinDirStat.WinDirStat'
-            
+
         }
         
         foreach($app in $apps.GetEnumerator()) {
