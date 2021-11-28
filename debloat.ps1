@@ -908,7 +908,7 @@ function InstallApps {
 
         $apps = @{
 
-            'Google Chrome' = 'Google.Google'
+            'Google Chrome' = 'Google.Chrome'
             'Mazilla Firefox' = 'Mozilla.Firefox'
             '7-Zip' = '7zip.7zip'
             'VLC Media Player' = 'VideoLAN.VLC'
