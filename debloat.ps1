@@ -886,7 +886,7 @@ function InstallApps {
         }
     
     #check winget installation
-    winget -v -erroraction silentlycontinue
+    winget -v 
     if (!$?) { 
         $Prompt2 = [Windows.MessageBox]::Show($InstallWinget, "Install Winget", $Button, $Warn)
         $wingetURI = 'https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle'
@@ -903,7 +903,7 @@ function InstallApps {
             }
         } 
     } 
-    winget -v -erroraction silentlycontinue
+    winget -v
     if ($?) { 
 
         $apps = @{
