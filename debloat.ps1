@@ -925,7 +925,7 @@ Function Remove3dObjects {
 
 function ContextMenu {
     $menuPath = "HKCU:Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32"
-    New-Item -Path $menuPath -Value $null -Force
+    New-Item -Path $menuPath -Value 1 -Force
     Stop-Process -Processname Explorer -WarningAction SilentlyContinue -Force
     Start-Sleep 5
     Start-Process Explorer -Wait -WarningAction SilentlyContinue
