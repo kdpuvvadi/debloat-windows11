@@ -926,7 +926,7 @@ function InstallApps {
             Switch ($AppPrompt) {
                 Yes {
                     Write-Host "Installing $($app.Name)"
-                    winget install --id $($app.value) --silent
+                    winget install --id $($app.value) --silent --accept-source-agreements --accept-package-agreements
                     Write-Host "$($app.Name) has been successfully installed!"
                 }
                 No {
