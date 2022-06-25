@@ -897,6 +897,7 @@ function InstallApps {
                 Invoke-WebRequest -Uri $wingetURI -OutFile $env:TEMP/winget.msixbundle
                 Add-AppPackage -Path $env:TEMP/winget.msixbundle
                 Write-Host "winget has been successfully installed!"
+                Remove-Item -Path $env:TEMP/winget.msixbundle
             }
             No {
                 Write-Host "Skipping winget install."
