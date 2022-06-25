@@ -917,7 +917,12 @@ function InstallApps {
             'Visual Studio Code' = 'Microsoft.VisualStudioCode'
             'Powertoys' = 'Microsoft.PowerToys'
             'WinDirStat' = 'WinDirStat.WinDirStat'
-
+            'Git' = 'Git.Git'
+            'Github CLI' = 'GitHub.cli'
+            'NodeJS' = 'OpenJS.NodeJS.LTS'
+            'Python 3' = 'Python.Python.3'
+            'Postman' = 'Postman.Postman'
+            'Docker Desktop' = 'Docker.DockerDesktop'
         }
         
         foreach($app in $apps.GetEnumerator()) {
