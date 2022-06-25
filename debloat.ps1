@@ -814,7 +814,7 @@ Function RemoveApps {
     foreach ($App in $AppList) {
         Get-AppxPackage -Name $App| Remove-AppxPackage
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $App | Remove-AppxProvisionedPackage -Online
-        Write-Output "Trying to remove $Bloat."
+        Write-Output "Trying to remove $App."
     }
     Clear-Host
 }
