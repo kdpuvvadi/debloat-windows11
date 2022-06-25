@@ -795,7 +795,7 @@ Function RemoveApps {
         #Add sponsored/featured apps to remove in the "*AppName*" format
         "*EclipseManager*"
         "*ActiproSoftwareLLC*"
-        "*AdobeSystemsIncorporated.AdobePhotoshopExpress*"
+        "AdobeSystemsIncorporated.AdobePhotoshopExpress"
         "*Duolingo-LearnLanguagesforFree*"
         "*PandoraMediaInc*"
         "*CandyCrush*"
