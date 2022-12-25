@@ -754,7 +754,7 @@ function LightMode {
 
 Function RemoveApps {
 
-    $AppList = @(
+    $RemoveAppList = @(
 
         #Unnecessary Windows 11 AppX Apps
         "Microsoft.BingNews"
@@ -812,14 +812,16 @@ Function RemoveApps {
         "*Speed Test*"
         "*Dolby*"
     )
-    foreach ($App in $AppList) {
-        Get-AppxPackage -Name $App| Remove-AppxPackage
-        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $App | Remove-AppxProvisionedPackage -Online
-        Write-Output "Trying to remove $App."
-    }
-    Clear-Host
-}
+    foreach ($RemoveApp in $RemoveAppList) {
+        Write-Host -NoNewline "Trying to remove $RemoveApp."
+        Get-AppxPackage -Name $RemoveApp | Remove-AppxPackage
+        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $RemoveApp | Remove-AppxProvisionedPackage -Online
+        if ($?) {
+            Write-Host " Done" -ForegroundColor Green
+        }
 
+    }
+}
 
 Function Remove-Keys {
         
