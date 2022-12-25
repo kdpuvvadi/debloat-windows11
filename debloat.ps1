@@ -790,6 +790,7 @@ Function RemoveApps {
         "Microsoft.XboxSpeechToTextOverlay"
         "Microsoft.ZuneMusic"
         "Microsoft.ZuneVideo"
+        "Clipchamp.Clipchamp_yxz26nhyzhsrt"
 
         #Sponsored Windows 11 AppX Apps
         #Add sponsored/featured apps to remove in the "*AppName*" format
