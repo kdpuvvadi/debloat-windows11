@@ -794,6 +794,13 @@ Function RemoveApps {
         "Microsoft.YourPhone"
         "Microsoft.MSPaint"
         "Microsoft.MixedReality.Portal"
+	"Microsoft.Todos"
+	"Microsoft.PowerAutomaterDesktop"
+	#McAfee
+	"5A894077.McAfeeSecurity"
+	#Asus Specific
+	"B9ECED6F.ScreenPadMaster"
+	"B9ECED6F.ASUSPCAssistant"
         #Sponsored Windows 11 AppX Apps
         #Add sponsored/featured apps to remove in the "*AppName*" format
         "*EclipseManager*"
