@@ -1,5 +1,12 @@
 # Windows 11 Debloater
 
+If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
+    Write-Host "Elevation required. This script will self elevate to run as an Administrator and continue."
+    Start-Sleep 1
+    Start-Process powershell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
+    Exit
+}
+
 $logsFolder = "$PWD\logs\"
 $logMessage = "The log folder doesn't exist. This folder will be used for storing logs created after the script runs. Creating now."
 If (Test-Path $logsFolder) {
@@ -23,13 +30,6 @@ Clear-Host
 $GetOSVersion = (Get-ItemProperty  -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuildNumber
 if ($GetOSVersion -lt '22000') {
     throw "Windows build number $GetOSVersion is not supported"
-}
-
-If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
-    Write-Host "You didn't run this script as an Administrator. This script will self elevate to run as an Administrator and continue."
-    Start-Sleep 1
-    Start-Process powershell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
-    Exit
 }
 
 Add-Type -AssemblyName PresentationFramework
