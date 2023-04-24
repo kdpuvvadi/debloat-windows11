@@ -790,7 +790,9 @@ Function RemoveApps {
         "Microsoft.XboxSpeechToTextOverlay"
         "Microsoft.ZuneMusic"
         "Microsoft.ZuneVideo"
+        # ClipChamp package name & Package family name. Little stubborn it is.
         "Clipchamp.Clipchamp_yxz26nhyzhsrt"
+        "Clipchamp.Clipchamp"
         "Microsoft.YourPhone"
         "Microsoft.MSPaint"
         "Microsoft.MixedReality.Portal"
