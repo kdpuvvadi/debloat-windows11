@@ -838,7 +838,7 @@ Function RemoveApps {
         }
     }
     
-	#Setting these keys is nessasary if on-demand apps (like instagram, Amazon Prime etc.) should be removed from start menu.
+	#Setting these keys is necessary if on-demand apps (like instagram, Amazon Prime etc.) should be removed from start menu.
 	#Those apps are not installed and cannot be uninstalled since they get installed after you click on them
 	$ccExist = Test-path -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent"
 	if (!$ccExist)
