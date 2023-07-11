@@ -836,8 +836,20 @@ Function RemoveApps {
         if ($?) {
             Write-Host " Done" -ForegroundColor Green
         }
-
     }
+    
+	#Setting these keys is nessasary if on-demand apps (like instagram, Amazon Prime etc.) should be removed from start menu.
+	#Those apps are not installed and cannot be uninstalled since they get installed after you click on them
+	$ccExist = Test-path -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent"
+	if (!$ccExist)
+	{
+		New-Item -Path "HKLM:Software\Policies\Microsoft\Windows" -Name CloudContent 
+	}
+	New-ItemProperty -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent" -Name "DisableConsumerAccountStateContent" -Value "1"  -PropertyType "DWORD" -Force
+	New-ItemProperty -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent" -Name "DisableCloudOptimizedContent" -Value "1"  -PropertyType "DWORD" -Force
+	
+	#!!!Enable this if you want to reset values to default!!!
+	#Remove-Item -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent" -Force
 }
 
 Function Remove-Keys {
