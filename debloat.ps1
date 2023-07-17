@@ -7,7 +7,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Exit
 }
 
-$logsFolder = "$PWD\logs\"
+$logsFolder = "$ENV:LOCALAPPDATA\debloat-logs\"
 $logMessage = "The log folder doesn't exist. This folder will be used for storing logs created after the script runs. Creating now."
 If (Test-Path $logsFolder) {
     Write-Output "$logsFolder exists. Skipping."
@@ -19,13 +19,11 @@ Else {
     Write-Output "The folder $logsFolder was successfully created." `n
     Start-Sleep 1
 }
-$logfile = Get-Date -Format "ddMMyyhh"
+$logfile = Get-Date -Format "ddMMyyhhss"
 $logfilepath =  "$logsFolder/log-$logfile.log"
 Start-Transcript -path $logfilepath -IncludeInvocationHeader -Append
 
-
 Clear-Host
-
 
 $GetOSVersion = (Get-ItemProperty  -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuildNumber
 if ($GetOSVersion -lt '22000') {
@@ -850,7 +848,7 @@ Function RemoveApps {
 	
 	#!!!Enable this if you want to reset values to default!!!
 	#Remove-Item -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent" -Force
-    Stop-Process Explorer -Force
+    Stop-Process -ProcessName Explorer -Force
     Start-Sleep -Seconds 10
     Start-Process Explorer -Wait
 }
