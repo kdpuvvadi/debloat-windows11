@@ -778,9 +778,9 @@ Function RemoveApps {
         "Microsoft.Office.Todo.List"
         "Microsoft.Whiteboard"
         "Microsoft.WindowsAlarms"
-	"Microsoft.MicrosoftStickyNotes"
- 	"MicrosoftCorporationII.QuickAssist"
-  	"MicrosoftTeams"
+        "Microsoft.MicrosoftStickyNotes"
+        "MicrosoftCorporationII.QuickAssist"
+        "MicrosoftTeams"
         #"Microsoft.WindowsCamera"
         "microsoft.windowscommunicationsapps"
         "Microsoft.WindowsFeedbackHub"
@@ -788,12 +788,12 @@ Function RemoveApps {
         "Microsoft.WindowsSoundRecorder"
         "Microsoft.Xbox.TCUI"
         "Microsoft.XboxApp"
-	"Microsoft.GamingApp"
- 	"Microsoft.GamingServices"
+	    "Microsoft.GamingApp"
+ 	    "Microsoft.GamingServices"
         "Microsoft.XboxGamingOverlay"
         "Microsoft.XboxIdentityProvider"
         "Microsoft.XboxSpeechToTextOverlay"
-	"Microsoft.XboxDevices"
+	    "Microsoft.XboxDevices"
         "Microsoft.ZuneMusic"
         "Microsoft.ZuneVideo"
         # ClipChamp package name & Package family name. Little stubborn it is.
@@ -802,13 +802,13 @@ Function RemoveApps {
         "Microsoft.YourPhone"
         "Microsoft.MSPaint"
         "Microsoft.MixedReality.Portal"
-	"Microsoft.Todos"
-	"Microsoft.PowerAutomateDesktop"
-	#McAfee
-	"5A894077.McAfeeSecurity"
-	#Asus Specific
-	"B9ECED6F.ScreenPadMaster"
-	"B9ECED6F.ASUSPCAssistant"
+        "Microsoft.Todos"
+        "Microsoft.PowerAutomateDesktop"
+        #McAfee
+        "5A894077.McAfeeSecurity"
+        #Asus Specific
+        "B9ECED6F.ScreenPadMaster"
+        "B9ECED6F.ASUSPCAssistant"
         #Sponsored Windows 11 AppX Apps
         #Add sponsored/featured apps to remove in the "*AppName*" format
         "*EclipseManager*"
@@ -850,6 +850,9 @@ Function RemoveApps {
 	
 	#!!!Enable this if you want to reset values to default!!!
 	#Remove-Item -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent" -Force
+    Stop-Process Explorer -Force
+    Start-Sleep -Seconds 10
+    Start-Process Explorer -Wait
 }
 
 Function Remove-Keys {
