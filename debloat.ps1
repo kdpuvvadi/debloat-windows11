@@ -778,6 +778,9 @@ Function RemoveApps {
         "Microsoft.Office.Todo.List"
         "Microsoft.Whiteboard"
         "Microsoft.WindowsAlarms"
+	"Microsoft.MicrosoftStickyNotes"
+ 	"MicrosoftCorporationII.QuickAssist"
+  	"MicrosoftTeams"
         #"Microsoft.WindowsCamera"
         "microsoft.windowscommunicationsapps"
         "Microsoft.WindowsFeedbackHub"
@@ -785,9 +788,12 @@ Function RemoveApps {
         "Microsoft.WindowsSoundRecorder"
         "Microsoft.Xbox.TCUI"
         "Microsoft.XboxApp"
-        "Microsoft.XboxGameOverlay"
+	"Microsoft.GamingApp"
+ 	"Microsoft.GamingServices"
+        "Microsoft.XboxGamingOverlay"
         "Microsoft.XboxIdentityProvider"
         "Microsoft.XboxSpeechToTextOverlay"
+	"Microsoft.XboxDevices"
         "Microsoft.ZuneMusic"
         "Microsoft.ZuneVideo"
         # ClipChamp package name & Package family name. Little stubborn it is.
@@ -797,7 +803,7 @@ Function RemoveApps {
         "Microsoft.MSPaint"
         "Microsoft.MixedReality.Portal"
 	"Microsoft.Todos"
-	"Microsoft.PowerAutomaterDesktop"
+	"Microsoft.PowerAutomateDesktop"
 	#McAfee
 	"5A894077.McAfeeSecurity"
 	#Asus Specific
@@ -830,8 +836,20 @@ Function RemoveApps {
         if ($?) {
             Write-Host " Done" -ForegroundColor Green
         }
-
     }
+    
+	#Setting these keys is necessary if on-demand apps (like instagram, Amazon Prime etc.) should be removed from start menu.
+	#Those apps are not installed and cannot be uninstalled since they get installed after you click on them
+	$ccExist = Test-path -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent"
+	if (!$ccExist)
+	{
+		New-Item -Path "HKLM:Software\Policies\Microsoft\Windows" -Name CloudContent 
+	}
+	New-ItemProperty -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent" -Name "DisableConsumerAccountStateContent" -Value "1"  -PropertyType "DWORD" -Force
+	New-ItemProperty -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent" -Name "DisableCloudOptimizedContent" -Value "1"  -PropertyType "DWORD" -Force
+	
+	#!!!Enable this if you want to reset values to default!!!
+	#Remove-Item -Path "HKLM:Software\Policies\Microsoft\Windows\CloudContent" -Force
 }
 
 Function Remove-Keys {
