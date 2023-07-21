@@ -802,6 +802,9 @@ Function RemoveApps {
         "Microsoft.MixedReality.Portal"
         "Microsoft.Todos"
         "Microsoft.PowerAutomateDesktop"
+        "Microsoft.MicrosoftJournal"
+        "Microsoft.BingTranslator"
+        "Microsoft.BingWeather"
         #McAfee
         "5A894077.McAfeeSecurity"
         #Asus Specific
@@ -826,6 +829,13 @@ Function RemoveApps {
         "*Sway*"
         "*Speed Test*"
         "*Dolby*"
+        # LinkedIn
+        "7EE7776C.LinkedInforWindows"
+        # MSI BusinessCenter
+        "9426MICRO-STARINTERNATION.BusinessCenter"
+        # Norton
+        "NortonSecurity_1.0.0.1_neutral__cjtsyd8xszapp"
+
     )
     foreach ($RemoveApp in $RemoveAppList) {
         Write-Host -NoNewline "Trying to remove $RemoveApp."
