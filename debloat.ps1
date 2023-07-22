@@ -752,95 +752,12 @@ function LightMode {
 
 Function RemoveApps {
 
-    $RemoveAppList = @(
+    $RemoveAppList=(Get-Content -Path .\RemoveAppsList.json | ConvertFrom-Json).RemoveAppList
 
-        #Unnecessary Windows 11 AppX Apps
-        "Microsoft.BingNews"
-        "Microsoft.GetHelp"
-        "Microsoft.Getstarted"
-        "Microsoft.Messaging"
-        "Microsoft.Microsoft3DViewer"
-        "Microsoft.MicrosoftOfficeHub"
-        "Microsoft.MicrosoftSolitaireCollection"
-        "Microsoft.NetworkSpeedTest"
-        "Microsoft.News"
-        "Microsoft.Office.Lens"
-        "Microsoft.Office.OneNote"
-        "Microsoft.Office.Sway"
-        "Microsoft.OneConnect"
-        "Microsoft.People"
-        "Microsoft.Print3D"
-        "Microsoft.RemoteDesktop"
-        "Microsoft.SkypeApp"
-        "Microsoft.StorePurchaseApp"
-        "Microsoft.Office.Todo.List"
-        "Microsoft.Whiteboard"
-        "Microsoft.WindowsAlarms"
-        "Microsoft.MicrosoftStickyNotes"
-        "MicrosoftCorporationII.QuickAssist"
-        "MicrosoftTeams"
-        #"Microsoft.WindowsCamera"
-        "microsoft.windowscommunicationsapps"
-        "Microsoft.WindowsFeedbackHub"
-        "Microsoft.WindowsMaps"
-        "Microsoft.WindowsSoundRecorder"
-        "Microsoft.Xbox.TCUI"
-        "Microsoft.XboxApp"
-	    "Microsoft.GamingApp"
- 	    "Microsoft.GamingServices"
-        "Microsoft.XboxGamingOverlay"
-        "Microsoft.XboxIdentityProvider"
-        "Microsoft.XboxSpeechToTextOverlay"
-	    "Microsoft.XboxDevices"
-        "Microsoft.ZuneMusic"
-        "Microsoft.ZuneVideo"
-        # ClipChamp package name & Package family name. Little stubborn it is.
-        "Clipchamp.Clipchamp_yxz26nhyzhsrt"
-        "Clipchamp.Clipchamp"
-        "Microsoft.YourPhone"
-        "Microsoft.MSPaint"
-        "Microsoft.MixedReality.Portal"
-        "Microsoft.Todos"
-        "Microsoft.PowerAutomateDesktop"
-        "Microsoft.MicrosoftJournal"
-        "Microsoft.BingTranslator"
-        "Microsoft.BingWeather"
-        #McAfee
-        "5A894077.McAfeeSecurity"
-        #Asus Specific
-        "B9ECED6F.ScreenPadMaster"
-        "B9ECED6F.ASUSPCAssistant"
-        #Sponsored Windows 11 AppX Apps
-        #Add sponsored/featured apps to remove in the "*AppName*" format
-        "*EclipseManager*"
-        "*ActiproSoftwareLLC*"
-        "AdobeSystemsIncorporated.AdobePhotoshopExpress"
-        "*Duolingo-LearnLanguagesforFree*"
-        "*PandoraMediaInc*"
-        "*CandyCrush*"
-        "*BubbleWitch3Saga*"
-        "*Wunderlist*"
-        "*Flipboard*"
-        "*Twitter*"
-        "*Facebook*"
-        "*Spotify*"
-        "*Minecraft*"
-        "*Royal Revolt*"
-        "*Sway*"
-        "*Speed Test*"
-        "*Dolby*"
-        # LinkedIn
-        "7EE7776C.LinkedInforWindows"
-        # MSI BusinessCenter
-        "9426MICRO-STARINTERNATION.BusinessCenter"
-        # Norton
-        "NortonSecurity_1.0.0.1_neutral__cjtsyd8xszapp"
-
-    )
     foreach ($RemoveApp in $RemoveAppList) {
-        Write-Host -NoNewline "Trying to remove $RemoveApp."
-        Get-AppxPackage -Name $RemoveApp | Remove-AppxPackage
-        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $RemoveApp | Remove-AppxProvisionedPackage -Online
+        Write-Host -NoNewline "Trying to remove $($RemoveApp.Id)"
+        Get-AppxPackage -Name $RemoveApp.Id | Remove-AppxPackage
+        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $RemoveApp.Id | Remove-AppxProvisionedPackage -Online
         if ($?) {
             Write-Host " Done" -ForegroundColor Green
         }

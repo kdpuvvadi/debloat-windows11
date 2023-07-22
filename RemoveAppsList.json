@@ -1,0 +1,217 @@
+{
+  "RemoveAppList": [
+    {
+      "Id": "Microsoft.BingNews"
+    },
+    {
+      "Id": "Microsoft.GetHelp"
+    },
+    {
+      "Id": "Microsoft.Getstarted"
+    },
+    {
+      "Id": "Microsoft.Messaging"
+    },
+    {
+      "Id": "Microsoft.Microsoft3DViewer"
+    },
+    {
+      "Id": "Microsoft.MicrosoftOfficeHub"
+    },
+    {
+      "Id": "Microsoft.MicrosoftSolitaireCollection"
+    },
+    {
+      "Id": "Microsoft.NetworkSpeedTest"
+    },
+    {
+      "Id": "Microsoft.News"
+    },
+    {
+      "Id": "Microsoft.Office.Lens"
+    },
+    {
+      "Id": "Microsoft.Office.OneNote"
+    },
+    {
+      "Id": "Microsoft.Office.Sway"
+    },
+    {
+      "Id": "Microsoft.OneConnect"
+    },
+    {
+      "Id": "Microsoft.People"
+    },
+    {
+      "Id": "Microsoft.Print3D"
+    },
+    {
+      "Id": "Microsoft.RemoteDesktop"
+    },
+    {
+      "Id": "Microsoft.SkypeApp"
+    },
+    {
+      "Id": "Microsoft.StorePurchaseApp"
+    },
+    {
+      "Id": "Microsoft.Office.Todo.List"
+    },
+    {
+      "Id": "Microsoft.Whiteboard"
+    },
+    {
+      "Id": "Microsoft.WindowsAlarms"
+    },
+    {
+      "Id": "Microsoft.MicrosoftStickyNotes"
+    },
+    {
+      "Id": "MicrosoftCorporationII.QuickAssist"
+    },
+    {
+      "Id": "MicrosoftTeams"
+    },
+    {
+      "Id": "microsoft.windowscommunicationsapps"
+    },
+    {
+      "Id": "Microsoft.WindowsFeedbackHub"
+    },
+    {
+      "Id": "Microsoft.WindowsMaps"
+    },
+    {
+      "Id": "Microsoft.WindowsSoundRecorder"
+    },
+    {
+      "Id": "Microsoft.Xbox.TCUI"
+    },
+    {
+      "Id": "Microsoft.XboxApp"
+    },
+    {
+      "Id": "Microsoft.GamingApp"
+    },
+    {
+      "Id": "Microsoft.GamingServices"
+    },
+    {
+      "Id": "Microsoft.XboxGamingOverlay"
+    },
+    {
+      "Id": "Microsoft.XboxIdentityProvider"
+    },
+    {
+      "Id": "Microsoft.XboxSpeechToTextOverlay"
+    },
+    {
+      "Id": "Microsoft.XboxDevices"
+    },
+    {
+      "Id": "Microsoft.ZuneMusic"
+    },
+    {
+      "Id": "Microsoft.ZuneVideo"
+    },
+    {
+      "Id": "Clipchamp.Clipchamp_yxz26nhyzhsrt"
+    },
+    {
+      "Id": "Clipchamp.Clipchamp"
+    },
+    {
+      "Id": "Microsoft.YourPhone"
+    },
+    {
+      "Id": "Microsoft.MSPaint"
+    },
+    {
+      "Id": "Microsoft.MixedReality.Portal"
+    },
+    {
+      "Id": "Microsoft.Todos"
+    },
+    {
+      "Id": "Microsoft.PowerAutomateDesktop"
+    },
+    {
+      "Id": "Microsoft.MicrosoftJournal"
+    },
+    {
+      "Id": "Microsoft.BingTranslator"
+    },
+    {
+      "Id": "Microsoft.BingWeather"
+    },
+    {
+      "Id": "5A894077.McAfeeSecurity"
+    },
+    {
+      "Id": "B9ECED6F.ScreenPadMaster"
+    },
+    {
+      "Id": "B9ECED6F.ASUSPCAssistant"
+    },
+    {
+      "Id": "*EclipseManager*"
+    },
+    {
+      "Id": "*ActiproSoftwareLLC*"
+    },
+    {
+      "Id": "AdobeSystemsIncorporated.AdobePhotoshopExpress"
+    },
+    {
+      "Id": "*Duolingo-LearnLanguagesforFree*"
+    },
+    {
+      "Id": "*PandoraMediaInc*"
+    },
+    {
+      "Id": "*CandyCrush*"
+    },
+    {
+      "Id": "*BubbleWitch3Saga*"
+    },
+    {
+      "Id": "*Wunderlist*"
+    },
+    {
+      "Id": "*Flipboard*"
+    },
+    {
+      "Id": "*Twitter*"
+    },
+    {
+      "Id": "*Facebook*"
+    },
+    {
+      "Id": "*Spotify*"
+    },
+    {
+      "Id": "*Minecraft*"
+    },
+    {
+      "Id": "*Royal Revolt*"
+    },
+    {
+      "Id": "*Sway*"
+    },
+    {
+      "Id": "*Speed Test*"
+    },
+    {
+      "Id": "*Dolby*"
+    },
+    {
+      "Id": "7EE7776C.LinkedInforWindows"
+    },
+    {
+      "Id": "9426MICRO-STARINTERNATION.BusinessCenter"
+    },
+    {
+      "Id": "NortonSecurity_1.0.0.1_neutral__cjtsyd8xszapp"
+    }
+  ]
+}
