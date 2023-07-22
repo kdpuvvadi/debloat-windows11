@@ -24,6 +24,12 @@ git clone https://github.com/kdpuvvadi/debloat-windows11.git
 ## Quick run
 
 ```powershell
+iwr https://puvvadi.me/debloat11 | iex
+```
+
+or
+
+```powershell
 iwr https://git.io/debloat11 | iex
 ```
 
