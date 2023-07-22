@@ -865,44 +865,24 @@ function InstallApps {
         } 
     } 
     winget -v
-    if ($?) { 
-
-        $apps = @{
-
-            'Google Chrome' = 'Google.Chrome'
-            'Mazilla Firefox' = 'Mozilla.Firefox'
-            '7-Zip' = '7zip.7zip'
-            'VLC Media Player' = 'VideoLAN.VLC'
-            'Notepad++' = 'Notepad++.Notepad++'
-            'Visual Studio Code' = 'Microsoft.VisualStudioCode'
-            'Powertoys' = 'Microsoft.PowerToys'
-            'WinDirStat' = 'WinDirStat.WinDirStat'
-            'Git' = 'Git.Git'
-            'Github CLI' = 'GitHub.cli'
-            'NodeJS' = 'OpenJS.NodeJS.LTS'
-            'Python 3' = 'Python.Python.3'
-            'Postman' = 'Postman.Postman'
-            'Docker Desktop' = 'Docker.DockerDesktop'
-        }
-        
-        foreach($app in $apps.GetEnumerator()) {
-
-            $AppPrompt = [Windows.MessageBox]::Show("Install $($app.Name)", $($app.Name), $Button, $Warn)
-
+    if ($?) {
+        $AppList=(Get-Content -Path .\installapps.json | ConvertFrom-Json).Packages
+        foreach($app in $AppList) {
+            $AppPrompt = [Windows.MessageBox]::Show("Install $($app.Name) with Scope $($app.Scope)", $($app.Name), $Button, $Warn)
             Switch ($AppPrompt) {
                 Yes {
-                    Write-Host "Installing $($app.Name)"
-                    winget install --id $($app.value) --silent --accept-source-agreements --accept-package-agreements
-                    Write-Host "$($app.Name) has been successfully installed!"
+                    Write-Host "Installing $($app.Name) with Scope $($app.Scope)"
+                    winget install --id $($app.Id) --scope $($app.Scope) --silent --accept-source-agreements --accept-package-agreements
+                    if ($?) {
+                        Write-Host "$($app.Name) has been successfully installed!"
+                    }
                 }
                 No {
                     Write-Host "Skipping $($app.Name)"
                 }
             }   
-
         }
     }
-    
 }
 
 Function Remove3dObjects {

@@ -1,0 +1,74 @@
+{
+  "Packages": [
+    {
+      "Id": "Google.Chrome",
+      "Name": "Google Chrome",
+      "Scope": "machine"
+    },
+    {
+      "Id": "Mozilla.Firefox",
+      "Name": "Firefox",
+      "Scope": "machine"
+    },
+    {
+      "Id": "7zip.7zip",
+      "Name": "7Zip",
+      "Scope": "machine"
+    },
+    {
+      "Id": "VideoLAN.VLC",
+      "Name": "VLC Media Player",
+      "Scope": "machine"
+    },
+    {
+      "Id": "Notepad++.Notepad++",
+      "Name": "Notepad++",
+      "Scope": "machine"
+    },
+    {
+      "Id": "Microsoft.VisualStudioCode",
+      "Name": "Visual Studio Code",
+      "Scope": "machine"
+    },
+    {
+      "Id": "Microsoft.PowerToys",
+      "Name": "PowerToys",
+      "Scope": "user"
+    },
+    {
+      "Id": "WinDirStat.WinDirStat",
+      "Name": "WinDirStat",
+      "Scope": "user"
+    },
+    {
+      "Id": "Git.Git",
+      "Name": "Git",
+      "Scope": "machine"
+    },
+    {
+      "Id": "GitHub.cli",
+      "Name": "Github CLI",
+      "Scope": "user"
+    },
+    {
+      "Id": "OpenJS.NodeJS.LTS",
+      "Name": "NodeJS LTS",
+      "Scope": "machine"
+    },
+    {
+      "Id": "Python.Python.3.11",
+      "Name": "Python 3.11",
+      "Scope": "machine"
+    },
+    {
+      "Id": "Postman.Postman",
+      "Name": "Postman",
+      "Scope": "user"
+    },
+    {
+      "Id": "Docker.DockerDesktop",
+      "Name": "Docker Desktop",
+      "Scope": "machine"
+    }
+  ]
+}
