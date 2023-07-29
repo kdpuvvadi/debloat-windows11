@@ -871,7 +871,13 @@ function InstallApps {
     } 
     winget -v
     if ($?) {
-        $AppList=(Get-Content -Path .\installapps.json | ConvertFrom-Json).Packages
+
+        if (Test-Path -Path .\installapps.json -PathType Leaf) {
+            $AppList=(Get-Content -Path .\installapps.json | ConvertFrom-Json).Packages
+        } else {
+            Invoke-WebRequest -Uri https://puvvadi.me/installapps -OutFile $logsFolder\installapps.json
+            $AppList=(Get-Content -Path $logsFolder\installapps.json | ConvertFrom-Json).Packages
+        }
         foreach($app in $AppList) {
             $AppPrompt = [Windows.MessageBox]::Show("Install $($app.Name) with Scope $($app.Scope)", $($app.Name), $Button, $Warn)
             Switch ($AppPrompt) {
