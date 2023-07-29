@@ -7,7 +7,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Exit
 }
 
-$logsFolder = "$ENV:LOCALAPPDATA\debloat-logs\"
+    $logsFolder = "$ENV:LOCALAPPDATA\debloat-logs\"
 $logMessage = "The log folder doesn't exist. This folder will be used for storing logs created after the script runs. Creating now."
 If (Test-Path $logsFolder) {
     Write-Output "$logsFolder exists. Skipping."
@@ -752,7 +752,12 @@ function LightMode {
 
 Function RemoveApps {
 
-    $RemoveAppList=(Get-Content -Path .\RemoveAppsList.json | ConvertFrom-Json).RemoveAppList
+    if (Test-Path -Path .\RemoveAppsList.json -PathType Leaf) {
+        $RemoveAppList = (Get-Content -Path .\RemoveAppsList.json | ConvertFrom-Json).RemoveAppList
+    } else {
+        Invoke-WebRequest -Uri https://puvvadi.me/RemoveAppsList -OutFile $logsFolder\RemoveAppsList.json
+        $RemoveAppList = (Get-Content -Path $logsFolder\RemoveAppsList.json | ConvertFrom-Json).RemoveAppList
+    }
 
     foreach ($RemoveApp in $RemoveAppList) {
         Write-Host -NoNewline "Trying to remove $($RemoveApp.Id)"
@@ -866,7 +871,13 @@ function InstallApps {
     } 
     winget -v
     if ($?) {
-        $AppList=(Get-Content -Path .\installapps.json | ConvertFrom-Json).Packages
+
+        if (Test-Path -Path .\installapps.json -PathType Leaf) {
+            $AppList=(Get-Content -Path .\installapps.json | ConvertFrom-Json).Packages
+        } else {
+            Invoke-WebRequest -Uri https://puvvadi.me/installapps -OutFile $logsFolder\installapps.json
+            $AppList=(Get-Content -Path $logsFolder\installapps.json | ConvertFrom-Json).Packages
+        }
         foreach($app in $AppList) {
             $AppPrompt = [Windows.MessageBox]::Show("Install $($app.Name) with Scope $($app.Scope)", $($app.Name), $Button, $Warn)
             Switch ($AppPrompt) {
