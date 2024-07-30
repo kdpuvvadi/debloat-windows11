@@ -1,6 +1,10 @@
 
 # Debloat Windows 11
 
+| :warning: Deprication WARNING |
+|:----------------------------|
+| > deprecated. Please use [rufus](https://github.com/pbatard/rufus) & [winutil](https://github.com/christitustech/winutil) |
+
 Debloat your windows 11 install with ease.
 Still work in progress. Some features might be missing.
 
